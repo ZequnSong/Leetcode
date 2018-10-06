@@ -22,6 +22,7 @@ class Solution {
         Arrays.sort(nums);
         //fix数的范围从0至倒数第三，保证后面至少有两个数，加上fix数能凑成三个数
         for (int i = 0; i < nums.length -2; i++){
+            if(nums[i]>0) break;
             //从第二个数开始，如果和前面的数相等，就跳过，因为我们不想把相同的数fix两次
             if(i > 0 && nums[i] == nums[i - 1]) continue;
             //双指针low，high，新sum值，将问题转化为twosum
