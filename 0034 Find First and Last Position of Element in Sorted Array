@@ -31,6 +31,7 @@ class Solution {
     }
 }
 
+//------------------完全O(log n)算法 分别二分找到起始和终点-------------------------------------
 class Solution {
     public int[] searchRange(int[] nums, int target) {
          if( nums == null || nums.length == 0) return new int[]{-1, -1};
@@ -43,7 +44,9 @@ class Solution {
         }
         if (nums[left] != target) return res;
         res[0] = right;
-        right = nums.length;
+        right = nums.length - 1;
+        //处理特例如[1] 1; [2, 2] 2; 且节省时间
+        if(nums[right] == target) return new int[]{res[0],right};
         while (left < right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] <= target) left = mid + 1;
@@ -52,4 +55,5 @@ class Solution {
         res[1] = left - 1;
         return res;
     }
+}
 }
