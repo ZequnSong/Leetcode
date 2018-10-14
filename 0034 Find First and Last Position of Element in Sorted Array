@@ -43,17 +43,14 @@ class Solution {
             else right = mid;
         }
         if (nums[left] != target) return res;
-        res[0] = right;
+        res[0] = left;
         right = nums.length - 1;
-        //处理特例如[1] 1; [2, 2] 2; 且节省时间
-        if(nums[right] == target) return new int[]{res[0],right};
         while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (nums[mid] <= target) left = mid + 1;
-            else right = mid;
+            int mid = left + (right + 1 - left) / 2;
+            if (nums[mid] <= target) left = mid;
+            else right = mid - 1;
         }
-        res[1] = left - 1;
+        res[1] = left;
         return res;
     }
-}
 }
