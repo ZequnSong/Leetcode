@@ -15,6 +15,7 @@
  *直接在HashMap中查找其是否存在即可，注意要判断查找到的数字不是第一个数字，比如target是4，遍历到了一个2，那么另外一个2不能是之前那个2，
  *整个实现步骤为：先遍历一遍数组，建立HashMap映射，然后再遍历一遍，开始查找，找到则记录index。代码如下：
 */
+
 public int[] twoSum(int[] nums, int target) {
     if(nums == null || nums.length < 2) {
             return new int[]{-1, -1};
@@ -29,3 +30,5 @@ public int[] twoSum(int[] nums, int target) {
     }
     throw new IllegalArgumentException("No two sum solution");
 }
+
+
