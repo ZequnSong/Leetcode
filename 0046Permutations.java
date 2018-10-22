@@ -14,6 +14,7 @@ Output:
   [3,2,1]
 ]
 */
+//------------------------------------------------------------------------------------
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
@@ -32,4 +33,33 @@ class Solution {
             }
         }
     } 
+}
+//-----------------------------------------------------------------------------------
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        backtrack(list, 0, nums);
+        return list;
+    }
+    private void backtrack(List<List<Integer>> list, int start, int [] nums){
+        if(start == nums.length){
+            List<Integer> temp = new ArrayList<Integer>();
+            for(int i : nums){
+                temp.add(i);
+            }
+            list.add(new ArrayList<>(temp));
+           
+        } else{
+            for(int i = start; i < nums.length; i++){ 
+                swap(nums, start, i);
+                backtrack(list, start+1, nums);
+                swap(nums, start, i);
+            }
+        }
+    } 
+    private void swap(int[] nums,int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] =  temp;
+    }
 }
