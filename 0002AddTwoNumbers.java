@@ -18,26 +18,27 @@
  */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode dummy = new ListNode(0);
-        int sum = 0;
-        ListNode cur = dummy;
-        ListNode p1 = l1, p2 = l2;
-        while(p1 !=null || p2 != null){
-            if(p1 != null){
-                sum += p1.val;
-                p1 = p1.next;
+        ListNode res = new ListNode(0);
+        int sum = 0, carry = 0;
+        ListNode current = res;
+        while(l1!= null || l2!= null){
+            if(l1 != null){
+                sum += l1.val;
+                l1 = l1.next;
             }
-            if(p2 != null){
-                sum += p2.val;
-                p2 = p2.next;
+            if(l2 != null){
+                sum += l2.val;
+                l2 = l2.next;
             }
-            cur.next = new ListNode(sum % 10);
-            sum /= 10;
-            cur = cur.next;            
+            sum += carry;
+            current.next = new ListNode(sum%10);
+            carry = sum>=10 ? 1 : 0;
+            current = current.next; 
+            sum = 0;
         }
-        if(sum == 1){
-            cur.next = new ListNode(1);
+        if(carry == 1){
+            current.next = new ListNode(1);
         }
-        return dummy.next;
+        return res.next;        
     }
 }
