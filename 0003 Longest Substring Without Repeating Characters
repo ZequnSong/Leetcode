@@ -37,8 +37,7 @@
  */
  class Solution {
  //------------------HashMap-----------------------------
-    public int lengthOfLongestSubstring(String s) {
-        //存储窗口内每个字符的位置（key:char->value:index）
+    public int lengthOfLongestSubstring(String s) {     
         HashMap<Character, Integer> map = new HashMap<>();
         int res = 0;
         int i,j=0;
