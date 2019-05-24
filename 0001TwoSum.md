@@ -1,13 +1,17 @@
-Given an array of integers, return indices of the two numbers such that they add up to a specific target.
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
+**Two Sum**
+
+Given an array of integers, return **indices** of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have **exactly one** solution, and you may not use the same element twice.
 
 **Example**
 >
 Given nums = [2, 7, 11, 15], target = 9,
+
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
-------------------------------------------------------------------------------------------------
- 
+
+
 线性的时间复杂度
 只遍历一遍数组，并且每访问一个新数，要检查之前是否有遍历过的数与其相加等于target
 所以利用HashMap将之前遍历过的数存储起来，建立数字和其坐标位置之间的映射
