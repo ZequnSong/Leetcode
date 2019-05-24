@@ -39,9 +39,8 @@ O(n)思路：滑动窗口
  
 ```
 class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        //存储窗口内每个字符的位置（key:char->value:index）
-        HashMap<Character, Integer> map = new HashMap<>();
+    public int lengthOfLongestSubstring(String s) {      
+        Map<Character, Integer> map = new HashMap<>();
         int res = 0;
         int right,left=0;
         for(right = 0; right < s.length(); right++){
