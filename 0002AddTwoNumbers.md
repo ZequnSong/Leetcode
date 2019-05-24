@@ -21,7 +21,7 @@ public class ListNode {
 }
 ```
 O(n)思路：
-n = max(l1.length,l2.length)
+n = max(l1.length, l2.length)
 * 新建ListNode res 用于存储结果，current指针用于向res.next添加新的数位
 * 遍历l1 & l2
   * 若l1非空，l1.val加入sum中，l1变更为l1.next
