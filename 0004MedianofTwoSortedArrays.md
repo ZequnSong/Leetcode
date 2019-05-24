@@ -1,109 +1,101 @@
+# Median of Two Sorted Arrays
 
+There are two sorted arrays **nums1** and **nums2** of size m and n respectively.
 
+Find the median of the two sorted arrays. The overall run time complexity should be **O(log (m+n))**.
 
-/*
-    There are two sorted arrays nums1 and nums2 of size m and n respectively.
-    Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
-    You may assume nums1 and nums2 cannot be both empty.
-    Example :
-    nums1 = [1]
-    nums2 = [20，21]
-    The median is 20
-    O(log (m+n))
-    分治
-      *首先在随机位置将A分成两部分：
-      *                     left_A | right_A
-      * A [0]，A [1]，...，A [i-1] | A [i]，A [i + 1]，...，A [m-1]
-      * 由于A有m个元素，所以有m + 1种切割（i = 0〜m）。
-      * 其中：left_A.size() = i，right_A.size() = m-i。注意：当i = 0时，left_A为空，当i = m时，right_A为空。
-      *
-      * 同样，在随机位置将B切成两部分：
-      * 其中：left_B.size() = j，right_B.size() = n-j。
-      *                     left_B | right_B
-      * B [0]，B [1]，...，B [j-1] | B [j]，B [j + 1]，...，B [n-1]
-      *
-      * 将left_A和left_B放入一个集合，并将right_A和right_B放入另一个集合。把它们命名为left_part和right_part：
-      *                  left_part | right_part
-      * A [0]，A [1]，...，A [i-1] | A [i]，A [i + 1]，...，A [m-1]
-      * B [0]，B [1]，...，B [j-1] | B [j]，B [j + 1]，...，B [n-1]
-      *
-      * 思路：如果我们可以确保：
-      * left_part.size() == right_part.size()
-      * max（left_part）<= min（right_part）
-      *
-      * 那么将{A，B}中的所有元素划分为两个长度相等的部分，right_part总是大于left_part。
-      * 若 A.length + B.length 为奇数
-      * 将多余的一个数放在右边
-      * 中值= min（right_part）。
-      *
-      * 若 A.length + B.length 为偶数，则左右长度相等
-      * 中值=（max（left_part）+ min（right_part））/ 2。
-      * 为了确保这两个条件，只需要确保：
-      *
-      * （1）i + j == m - i + n - j
-      *  即    2*j == m + n - 2*i
-      *          j == (m + n)/2 - i
-      *   (m + n)/2 向下取整，m+n为奇时，保证了j切割偏左，使多余的数放在右边
-      *
-      * （2）确保 max（left_part）<= min（right_part）：
-      *      B [j-1] <= A [i]   -- MaxLeftB <= MinRightA
-      *      A [i-1] <= B [j]   -- MaxLeftA <= MinRightB
-      *
-      *  在a[0:m]中搜索i，找到一个切分点i（j =（m + n）/2-i）：
-      *  使得B [j-1] <= A [i] 且 A [i-1] <= B[j]。
-      *
-      *
-      *步骤：
-      * <1>设置imin = 0，imax = m，然后开始搜索[imin，imax]
-      * <2>设置i =（imin + imax）/ 2，j =（m + n）/ 2-i
-      * <3>现在left_part.size() == right_part.size()。而且只有3种情况：
-      * (1) B[j-1] <= A [i]和A [i-1] <= B [j]
-      * 意味着找到了切分点i，停止搜索。
-      * (2) B[j-1]> A [i]
-      * 意味着A [i]太小。必须调整i得到B [j-1] <= A [i]。
-      * 调整搜索范围为[i + 1，imax]。因此，imin = i + 1和然后回到第<2>步。
-      * (3) A [i-1]> B [j]
-      * 意味着A [i-1]太大，必须减少i得到A [i-1] <= B [j]。
-      * 设置imax = i-1然后回到第<2>步。
-      *
-      * 当找到切分点i时，中值为：
-      * max（A [i-1]，B [j-1]）（当m + n是奇数时）
-      * （max（A [i-1]，B [j-1]）+ min（A [i]，B [j]））/ 2（当m + n为偶数时）
-      *
-      */
-public static double findMedianSortedArrays(int[] a, int[] b) {
-        if(a.length>b.length)
-            return findMedianSortedArrays(b,a);
+You may assume **nums1** and **nums2** cannot be both empty.
 
-        int aLeft = 0;
-        int aRight = a.length - 1;
-        int cutA = 0; // number of elements in left part of A after cutting
-        int cutB; // number of elements in left part of B after cutting
-        while(cutA<=a.length){
-            // left[0 : cut-1] right[cut : length - 1]
-            cutA = (aRight - aLeft + 1)/2 + aLeft;
-            cutB = (a.length + b.length)/2 - cutA;
+**Example 1:**
+```
+nums1 = [1, 3]
+nums2 = [2]
 
-            //if left side of A is not empty, maxLeftA = a[cutA-1]
-            double maxLeftA = (cutA == 0) ? Integer.MIN_VALUE : a[cutA-1];
-            //if right side of A is not empty, minRightA = a[cutA-1]
-            double minRightA = (cutA == a.length) ? Integer.MAX_VALUE : a[cutA];
-            //if left side of B is not empty, maxLeftB = b[cutB-1]
-            double maxLeftB = (cutB == 0) ? Integer.MIN_VALUE : b[cutB-1];
-            //if right side of B is not empty, minRightB = b[cutB-1]
-            double minRightB = (cutB == b.length) ? Integer.MAX_VALUE : b[cutB];
+The median is 2.0
+```
+**Example 2:**
+```
+nums1 = [1, 2]
+nums2 = [3, 4]
 
+The median is (2 + 3)/2 = 2.5
+```
+O(log(n+m))思路：
 
-            if(maxLeftA > minRightB){
-                aRight = cutA - 1;
-            }else if(maxLeftB > minRightA){
-                aLeft = cutA + 1;
+* 假设两个有序数组的长度分别为m和n，由于两个数组长度之和 m+n 的奇偶不确定，因此需要分情况来讨论。对于奇数的情况，直接找到最中间的数即可，偶数的话需要求最中间两个数的平均值
+
+* 定义一个函数来在两个有序数组中找到第K个元素
+  * 首先，为了避免拷贝产生新的数组从而增加时间复杂度，我们使用两个变量i和j分别来标记数组 nums1 和 nums2 的起始位置。
+  * 使用二分法，对K二分，即分别在 nums1 和 nums2 中查找第 K/2 个元素
+  
+然后来处理一些 corner cases，比如当某一个数组的起始位置大于等于其数组长度时，说明其所有数字均已经被淘汰了，相当于一个空数组了，那么实际上就变成了在另一个数组中找数字，直接就可以找出来了。还有就是如果 K=1 的话，那么我们只要比较 nums1 和 nums2 的起始位置i和j上的数字就可以了。难点就在于一般的情况怎么处理？因为我们需要在两个有序数组中找到第K个元素，为了加快搜索的速度，我们要使用二分法，那么对谁二分呢，数组么？其实要对K二分，意思是我们需要分别在 nums1 和 nums2 中查找第 K/2 个元素，
+
+注意由于两个数组的长度不定，所以有可能某个数组没有第 K/2 个数字，所以需要先检查数组中到底存不存在第 K/2 个数字，如果存在就取出来，否则就赋值上一个整型最大值。
+如果某个数组没有第 K/2 个数字，那么我们就淘汰另一个数组的前 K/2 个数字即可。举个例子来说吧，比如 nums1 = {3}，nums2 = {2, 4, 5, 6, 7}，K=4，我们要找两个数组混合中第4个数字，那么我们分别在 nums1 和 nums2 中找第2个数字，我们发现 nums1 中只有一个数字，不存在第二个数字，那么 nums2 中的前2个数字可以直接跳过，为啥呢，因为我们要求整个混合数组的第4个数字，不管 nums1 中的那个数字是大是小，第4个数字绝不会出现在 nums2 的前两个数字中，所以可以直接跳过。
+
+最后就是二分法的核心啦，比较这两个数组的第 K/2 小的数字 midVal1 和 midVal2 的大小，如果第一个数组的第 K/2 个数字小的话，那么说明我们要找的数字肯定不在 nums1 中的前 K/2 个数字，所以我们可以将其淘汰，将 nums1 的起始位置向后移动 K/2 个，并且此时的K也自减去 K/2，调用递归，举个例子来说吧，比如 nums1 = {1, 3}，nums2 = {2, 4, 5}，K=4，我们要找两个数组混合中第4个数字，那么我们分别在 nums1 和 nums2 中找第2个数字，nums1 中的第2个数字是3，nums2 中的第2个数字是4，由于3小于4，所以混合数组中第4个数字肯定在 nums2 中，所以我们可以将 nums1 的起始位置向后移动 K/2 个。反之，我们淘汰 nums2 中的前 K/2 个数字，并将 nums2 的起始位置向后移动 K/2 个，并且此时的K也自减去 K/2，调用递归即可，参见代码如下：
+
+```
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        if((m+n)%2==0)
+            return (findKth(nums1,0,nums2,0,(m+n)/2)+findKth(nums1,0,nums2,0,(m+n)/2+1))/2.0;
+        else
+            return findKth(nums1,0,nums2,0,(m+n)/2+1);            
+    }
+    
+    int findKth(int[] nums1, int i, int[] nums2, int j, int k){
+        if(i >= nums1.length) return nums2[j + k - 1];
+        if(j >= nums2.length) return nums1[i + k - 1];
+        if(k == 1) return Math.min(nums1[i],nums2[j]);
+        
+        int mid1 = (i + k/2 - 1 < nums1.length) ? nums1[i+k/2-1] : Integer.MAX_VALUE;
+        int mid2 = (j + k/2 - 1 < nums2.length) ? nums2[j+k/2-1] : Integer.MAX_VALUE;
+        if(mid1 < mid2)
+            return findKth(nums1,i+k/2,nums2,j,k-k/2);
+        else
+            return findKth(nums1,i,nums2,j+k/2,k-k/2);
+    }
+
+}
+```
+
+O(n+m)思路：合并排序merge两个有序数组nums1和nums2，直接求中值
+
+```
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int[] merge = merge(nums1, nums2);
+        int length = merge.length;
+        double res;
+        if(length%2 == 0)
+            res = (merge[length/2-1]+ merge[length/2])/2.;
+        else
+            res = merge[length/2];
+        return res;
+    }
+    
+    int[] merge(int[] a, int[] b){
+        int[] res = new int[a.length + b.length];
+        int indexa = 0, indexb = 0;
+        while(indexa != a.length && indexb != b.length){
+            if(a[indexa]>b[indexb]){
+                res[indexa+indexb] = b[indexb++];
             }else{
-                if((a.length + b.length)%2==0)
-                    return (Math.max(maxLeftA,maxLeftB)+Math.min(minRightA,minRightB))/2;
-                else
-                    return Math.min(minRightA,minRightB);
+                res[indexa+indexb] = a[indexa++];
             }
         }
-        return -1;
+        
+        if(indexa != a.length){
+            System.arraycopy(a,indexa,res,indexa+indexb,a.length - indexa);
+        }
+        if(indexb != b.length){
+            System.arraycopy(b,indexb,res,indexa+indexb,b.length - indexb);
+        }
+        return res;
+        
     }
+}
+```
