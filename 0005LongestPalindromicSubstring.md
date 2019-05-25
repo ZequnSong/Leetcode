@@ -17,6 +17,7 @@ Note: "aba" is also a valid answer.
 Input: "cbbd"
 Output: "bb"
 ```
+**Solution 1:**
 
 O(n^2)思路:
 传统的验证回文串的方法就是两个两个的对称验证是否相等，那么对于找回文字串的问题，就要以每一个字符为中心，像两边扩散来寻找回文串
@@ -50,7 +51,7 @@ public:
     }
 };
 ```
-
+**Solution 2:**
 
 O(n^2)思路：Dynamic Programming 
 
