@@ -24,7 +24,7 @@ Assume we are dealing with an environment which could only store integers within
 O(n)思路： 翻转数字
 
 * 溢出问题
-  int型的数值范围是  [−2^31,  2^31 − 1]，-2147483648～2147483647
+  int型的数值范围是  [−2^31,  2^31 − 1]，-2147483648～2147483647<\br>
   如果翻转 1000000009，得到 9000000001，翻转后的数就超过了范围
   检验res是否大于Integer.MAX_VALUE/10
   * 如果大于，则res = res*10 +x%10必溢出
