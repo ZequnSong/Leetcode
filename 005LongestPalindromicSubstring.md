@@ -79,30 +79,36 @@ O(n^2)思路：Dynamic Programming
 | n | ? | ? | ? | ? | ? | 1 |
 
 * 维护一个二维数组 dp
-  * dp[i][j] 表示字符串区间 [i, j] 是否为回文串
-  * 当 i = j 时，只有一个字符，肯定是回文串
-  * 如果 i + 1 = j，说明是相邻字符，此时需要判断 s[i] 是否等于 s[j]，若相等则是回文串
-  * 如果i和j不相邻，即 j - i >= 2 时，除了判断 s[i] 和 s[j] 相等之外，dp[i + 1][j - 1] 若为真，就是回文串
+  * dp[i][j] 表示字符串区间 **[j, i]** 是否为回文串
+  * 当 j = i 时，只有一个字符，肯定是回文串
+  * 如果 i = j + 1，说明是相邻字符，此时需要判断 s[i] 是否等于 s[j]，若相等则是回文串
+  * 如果i和j不相邻，即 i > j + 1 时，除了判断 s[i] 和 s[j] 相等之外，dp[i - 1][j + 1] 若为真，就是回文串
   * 通过分析写出递推式如下：
   ```
-    dp[i][j] = 1                                     if i == j
-             = (s[i] == s[j])                        if j = i + 1
-             = (s[i] == s[j] && dp[i + 1][j - 1])    if j > i + 1
+   dp[i][j] = 1                                           if i == j
+            = (s[i] == s[j]) ? 1: 0                       if i == j + 1
+            = (s[i] == s[j] && dp[i - 1][j + 1]) ? 1: 0   if i > j + 1
   ```
-
     
 ```    
 class Solution {
     public static String longestPalindrome(String s) {
-
         if (s.isEmpty()) return "";
         int left = 0, right = 0, len = 0;
         int[][] dp = new  int[s.length()][s.length()];
+        
         for(int i = 0; i < s.length(); i++)
             dp[i][i] = 1;
+            
         for (int i = 0; i < s.length(); i++) {
             for (int j = 0; j < i; j++) {
-                dp[i][j] = ((s.charAt(i) == s.charAt(j)) && ((i - j) < 2 || dp[i - 1][j + 1]==1)) ? 1 : 0;
+                if(i == j + 1 && (s.charAt(i) == s.charAt(j)))
+                    dp[i][j] = 1;
+                else if(i > j + 1 && (s.charAt(i) == s.charAt(j)) && dp[i - 1][j + 1] == 1 )
+                    dp[i][j] = 1;
+                else
+                    dp[i][j] = 0;   
+                //dp[i][j] = ((s.charAt(i) == s.charAt(j)) && ((i - j) < 2 || dp[i - 1][j + 1]==1)) ? 1 : 0;
                 if (dp[i][j]==1 && len < i - j + 1) {
                     len = i - j + 1;
                     left = j;
