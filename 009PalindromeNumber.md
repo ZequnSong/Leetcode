@@ -21,6 +21,7 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 ```
 **Follow up:**
 Solve it without converting the integer to a string
+
 O(n)思路：每次取第一位和最后一位的数字进行比较
 
 不能转为string，而是直接对int进行操作
