@@ -1,7 +1,9 @@
-/*
+# Integer to Roman
+
 Given an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.
 
 Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+```
 Symbol       Value
 I             1
 V             5
@@ -10,6 +12,8 @@ L             50
 C             100
 D             500
 M             1000
+```
+For example, two is written as II in Roman numeral, just two one's added together. Twelve is written as, XII, which is simply X + II. The number twenty seven is written as XXVII, which is XX + V + II.
 There are six instances where subtraction is used:
 
 I can be placed before V (5) and X (10) to make 4 and 9. 
