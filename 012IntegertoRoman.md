@@ -14,12 +14,49 @@ D             500
 M             1000
 ```
 For example, two is written as II in Roman numeral, just two one's added together. Twelve is written as, XII, which is simply X + II. The number twenty seven is written as XXVII, which is XX + V + II.
-There are six instances where subtraction is used:
 
-I can be placed before V (5) and X (10) to make 4 and 9. 
-X can be placed before L (50) and C (100) to make 40 and 90. 
-C can be placed before D (500) and M (1000) to make 400 and 900.
-*/
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+* I can be placed before V (5) and X (10) to make 4 and 9. 
+* X can be placed before L (50) and C (100) to make 40 and 90. 
+* C can be placed before D (500) and M (1000) to make 400 and 900.
+
+**Example 1:**
+```
+Input: 3
+Output: "III"
+```
+**Example 2:**
+```
+Input: 4
+Output: "IV"
+```
+**Example 3:**
+```
+Input: 9
+Output: "IX"
+```
+**Example 4:**
+```
+Input: 58
+Output: "LVIII"
+Explanation: L = 50, V = 5, III = 3.
+```
+**Example 5:**
+```
+Input: 1994
+Output: "MCMXCIV"
+Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+```
+
+
+思路：
+
+* 列出所以字母表示数值和减法表示的特殊数值，从大到小排列
+* 将给定整数与已列出数值依次比较，若大于，将该数值从给定整数中减去，并将对应字母加入res，直至给定整数变为0
+
+
+```
 class Solution {
     public String intToRoman(int num) {
         int[] values = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
@@ -34,3 +71,4 @@ class Solution {
         return res.toString();
     }
 }
+```
