@@ -29,7 +29,9 @@ Input: "MCMXCIV"
 Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 ```
-思路1： 类似于 [012 Integer to Roman](https://github.com/ZequnSong/Leetcode/blob/master/012IntegertoRoman.md).
+思路： 类似于 [012 Integer to Roman](https://github.com/ZequnSong/Leetcode/blob/master/012IntegertoRoman.md).
+* 列出所有字母表示数值和减法表示的特殊数值，从大到小排列
+* 将给定字符串与已列出字符串依次比较，若等于，将对应数值加入res，直至给定字符串变为0
 ```
 class Solution {
     public int romanToInt(String s) {
