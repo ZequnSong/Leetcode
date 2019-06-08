@@ -27,11 +27,11 @@ Could you do this in one pass?
 
 1->2->3->4->5, and n = 2.
 
-1->2->3->4->5, after move 2 steps, cur = 3
+1->2->3->4->5, after move 2 steps, cur = 3</br>
       ↑
      cur
      
-1->2->3->4->5->null, after move 2 steps, cur = 3
+1->2->3->4->5->null, after move 2 steps, cur = 3</br>
       ↑     ↑
      pre   cur
 
