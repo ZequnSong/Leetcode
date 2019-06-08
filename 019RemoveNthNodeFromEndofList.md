@@ -54,7 +54,7 @@ Could you do this in one pass?
             cur = cur.next;
             n--;
         }
-        if(cur = null)
+        if(cur == null)
             return head.next;
         else{
             while(cur.next != null){
