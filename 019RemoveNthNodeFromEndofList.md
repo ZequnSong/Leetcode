@@ -31,7 +31,7 @@ Could you do this in one pass?
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;↑</br>
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;cur
      
-1->2->3->4->5->null, after move 2 steps, cur = 3</br>
+1->2->3->4->5->null, after cur.next = null, pre = 3, cur = 5</br>
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;↑&ensp;&ensp;&ensp;&ensp;&ensp;↑</br>
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;pre&ensp;&ensp;&ensp;cur
 
