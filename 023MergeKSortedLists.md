@@ -87,3 +87,60 @@ class Solution {
     };
 }
 ```
+**Method 2: Divide and Conquer **
+
+对半划分
+
+k个链表先划分为合并两个k/2个链表的任务，再不停的往下划分，直到划分成只有一个或两个链表的任务，开始合并
+
+举个例子来说比如合并6个链表，那么按照分治法，我们首先分别合并0和3，1和4，2和5。
+这样下一次只需合并3个链表，我们再合并1和3，最后和2合并就可以了。
+k是通过 (n+1)/2 计算的,加1是为了当n为奇数的时候，k能始终从后半段开始，比如当n=5时，那么此时k=3，则0和3合并，1和4合并，最中间的2空出来。当n是偶数的时候，加1也不会有影响，比如当n=4时，此时k=2，那么0和2合并，1和3合并
+```
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+        
+        int n = lists.length;
+        while(n > 1){
+            // i + k 
+            int k = (n + 1) / 2;
+            for( int i = 0; i < n/2; i++){
+                lists[i] = mergeTwoLists(lists[i], lists[i+k]);
+            }
+            n = k;
+        }
+        
+        return lists[0];        
+    }
+    
+    ListNode mergeTwoLists(ListNode l1, ListNode l2){
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+        while(l1 != null && l2 != null){
+            if(l1.val < l2.val){
+                current.next = l1;
+                l1 = l1.next;
+            }else{
+                current.next = l2;
+                l2 = l2.next;
+            }
+            current = current.next;
+        }
+        if(l1 != null)
+            current.next = l1;
+        else
+            current.next = l2;
+        return dummy.next;
+        
+    }
+}
+```
