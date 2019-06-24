@@ -90,12 +90,32 @@ class Solution {
 **Method 2: Divide and Conquer **
 
 对半划分
-
 k个链表先划分为合并两个k/2个链表的任务，再不停的往下划分，直到划分成只有一个或两个链表的任务，开始合并
 
-举个例子来说比如合并6个链表，那么按照分治法，我们首先分别合并0和3，1和4，2和5。
-这样下一次只需合并3个链表，我们再合并1和3，最后和2合并就可以了。
-k是通过 (n+1)/2 计算的,加1是为了当n为奇数的时候，k能始终从后半段开始，比如当n=5时，那么此时k=3，则0和3合并，1和4合并，最中间的2空出来。当n是偶数的时候，加1也不会有影响，比如当n=4时，此时k=2，那么0和2合并，1和3合并
+比如合并6个链表，首先分别合并0和3，1和4，2和5。
+下一次只需合并3个链表，我们再合并1和3，最后和2合并就可以了。
+
+n = lists.length
+k = (n+1)/2 加1是为了当n为奇数的时候，k能始终从后半段开始，比如
+
+* when n is odd (e.g n = 5, k = 3)
+[0], [1], [2], [3], [4]
+
+i = 0, i < n/2  => i < 2
+[0] merge with [0+k]=[3]
+[1] merge with [1+k]=[4]
+
+[2] left with no actions
+
+* when n is even (e.g n = 6, k = 3)
+[0], [1], [2], [3], [4], [5]
+
+i = 0, i < n/2  => i < 3
+[0] merge with [0+k]=[3]
+[1] merge with [1+k]=[4]
+[2] merge with [2+k]=[5]
+
+
 ```
 /**
  * Definition for singly-linked list.
@@ -117,8 +137,7 @@ class Solution {
                 lists[i] = mergeTwoLists(lists[i], lists[i+k]);
             }
             n = k;
-        }
-        
+        }        
         return lists[0];        
     }
     
