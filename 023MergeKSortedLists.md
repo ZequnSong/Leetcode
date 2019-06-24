@@ -131,7 +131,6 @@ class Solution {
         
         int n = lists.length;
         while(n > 1){
-            // i + k 
             int k = (n + 1) / 2;
             for( int i = 0; i < n/2; i++){
                 lists[i] = mergeTwoLists(lists[i], lists[i+k]);
