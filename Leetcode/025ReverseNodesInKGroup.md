@@ -15,6 +15,20 @@ For k = 3, you should return: 3->2->1->4->5
 * You may not alter the values in the list's nodes, only nodes itself may be changed.
 
 ---
+**思路1：**
+* 处理链表问题，一般在开头加dummy节点，以防止头节点丢失
+* pre 作为每组节点的头节点
+* cur指针每移动k次，说明pre(不包括pre)和cur(包括cur)之间有k个节点，对这组节点进行反转
+* 反转函数：
+  * last指针指向该组节点的开头，即pre.next，反转过后该节点会变成该组最后一个节点，故名为last
+  * 每次将last后的一个节点cur反转到前面，即pre和last之间，如：
+  * -1-->1-->2-->3-->4-->5-->6-->next
+  * pre &nbsp;last &nbsp;cur
+  * -1-->2-->1-->3-->4-->5-->6-->next
+  * pre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    last &nbsp;cur
+  * 直到cur等于next为止，则完成了一组的反转
+
+* 反转结束后，更新pre为上组反转后的最后一个节点last，更新cur为pre.next，继续移动cur
 
 ```
 /**
