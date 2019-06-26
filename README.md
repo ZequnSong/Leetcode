@@ -9,5 +9,4 @@ Include all my solutions and explanations for the Leetcode coding problems
 
 | # | Title | Difficulty |
 |---| ----- | ---------- |
-
 |1|[Two Sum](https://github.com/ZequnSong/Leetcode/blob/master/001TwoSum.md)|Easy|
