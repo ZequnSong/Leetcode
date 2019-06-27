@@ -27,7 +27,8 @@ For k = 3, you should return: 3->2->1->4->5
   * -1-->2-->1-->3-->4-->5-->6-->next
   * pre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    last &nbsp;cur
   * 直到cur等于next为止，则完成了一组的反转
-
+  * -1-->6-->5-->4-->3-->2-->1-->next
+  * pre &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;    last &emsp;&nbsp;cur
 * 反转结束后，更新pre为上组反转后的最后一个节点last，更新cur为pre.next，继续移动cur
 
 ```
