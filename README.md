@@ -9,6 +9,8 @@ Include all my solutions and explanations for the Leetcode coding problems
 
 | # | Title | Difficulty |
 |---| ----- | ---------- |
+|28|[Implement strStr()](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/028Implement_strStr().md)|Easy|
+|27|[Remove Element from Array](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/027RemoveElement.md)|Easy|
 |26|[Remove Duplicates from Sorted Array](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/026RemoveDuplicatesfromSortedArray.md)|Easy|
 |25|[Reverse Nodes in K-Group](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/025ReverseNodesInKGroup.md)|Hard|
 |24|[Swap Nodes in Pairs](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/024SwapNodesinPairs.md)|Medium|
