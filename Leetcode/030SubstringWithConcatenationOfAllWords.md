@@ -2,8 +2,6 @@
 
 You are given a string, s, and a list of words, words, that are all of the same length. Find all starting indices of substring(s) in s that is a concatenation of each word in words exactly once and without any intervening characters.
 
----
-
 **Example 1:**
 ```
 Input:
@@ -24,6 +22,8 @@ Output: []
 
 getOrDefault(Object key, V defaultValue)
 It returns the value to which the specified key is mapped, or defaultValue if the map contains no mapping for the key.
+
+---
 
 **Method:**
 
