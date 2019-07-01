@@ -9,6 +9,7 @@ Include all my solutions and explanations for the Leetcode coding problems
 
 | # | Title | Difficulty |
 |---| ----- | ---------- |
+|30|[Substring With Concatenation Of All Words](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/030SubstringWithConcatenationOfAllWords.md)|Hard|
 |29|[Divide Two Integes](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/029DivideTwoIntegers.md)|Medium|
 |28|[Implement strStr()](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/028Implement_strStr().md)|Easy|
 |27|[Remove Element from Array](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/027RemoveElement.md)|Easy|
