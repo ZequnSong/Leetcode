@@ -53,3 +53,6 @@ class Solution {
     }
 }
 ```
+**Method 2 : DP**
+求极值问题一般想到DP或Greedy，显然Greedy在这里不太适用，只有用DP了。
+http://bangbingsyb.blogspot.com/2014/11/leetcode-longest-valid-parentheses.html
