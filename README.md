@@ -11,10 +11,8 @@ Include all my solutions and explanations for the Leetcode coding problems
 |---| ----- | ---------- |
 |34|[Find First and Last Position of Element in Sorted Array](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/034FindFirstandLastPositionofElementinSortedArray.md)|Medium|
 |33|[Search in Rotated Sorted Array](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/033SearchinRotatedSortedArray.md)|Medium|
-|32|[Longest Valid Parentheses](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/032LongestValidParentheses.md#longest-valid-parentheses
-)|Hard|
-|31|[Next Permutation](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/031NextPermutation.md#next-permutation
-)|Medium|
+|32|[Longest Valid Parentheses](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/032LongestValidParentheses.md)|Hard|
+|31|[Next Permutation](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/031NextPermutation.md)|Medium|
 |30|[Substring With Concatenation Of All Words](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/030SubstringWithConcatenationOfAllWords.md)|Hard|
 |29|[Divide Two Integes](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/029DivideTwoIntegers.md)|Medium|
 |28|[Implement strStr()](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/028Implement_strStr().md)|Easy|
