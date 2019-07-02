@@ -17,48 +17,47 @@ Input: nums = [5,7,7,8,8,10], target = 6
 Output: [-1,-1]
 ```
 ---
-思路是首先对原数组使用二分查找法，找出其中一个目标值的位置，然后向两边搜索找出起始和结束的位置
-*/
-class Solution {
-    public int[] searchRange(int[] nums, int target) {
-        int idx = search(nums, 0, nums.length - 1, target);
-        if( idx == -1 )   return new int[]{-1, -1};            
-        int left = idx, right = idx;
-        //向两边搜索起始和结束位置
-        while( left > 0 && nums[left - 1] == target) left--;
-        while( right < nums.length - 1 && nums[right + 1] == target) right++;
-        return new int[]{left, right};
-    }
-    //二分法查找
-    public int search(int[] nums, int left, int right, int target){
-        if(left > right) return -1;
-        int mid = left + (right - left) / 2;
-        if(nums[mid] < target) return search(nums, mid + 1, right, target);
-        else if(nums[mid] > target) return search(nums, left, mid - 1, target);
-        else return mid;
-    }
-}
 
-//------------------完全O(log n)算法 分别二分找到起始和终点-------------------------------------
+使用两次二分查找法，第一次找到左边界，第二次调用找到右边界
+```
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-         if( nums == null || nums.length == 0) return new int[]{-1, -1};
-        int[] res = new int[]{-1,-1};
-        int left = 0, right = nums.length - 1;
-        while (left < right) {
+        int[] res = {-1,-1};        
+        if(nums.length == 0) return res;
+        int left = 0;
+        int right = nums.length - 1;
+        
+        //find left boundary
+        while(left < right){
+            //找左边界，mid取下平均值
             int mid = left + (right - left) / 2;
-            if (nums[mid] < target) left = mid + 1;
-            else right = mid;
+            if(nums[mid] < target)
+                left = mid + 1; //不会漏掉左边界
+            else if(nums[mid] > target)
+                right = mid - 1; //不会漏掉左边界
+            else
+                right = mid;//此时nums[mid] = target,mid有是左边界的可能，由于是求左边界，向左收缩，故缩小right = mid 而不是mid+1
         }
-        if (nums[left] != target) return res;
-        res[0] = left;
+        // 若不包含target，right可能会取到-1，故先测试right是否小于0
+        if(right < 0 || nums[right] != target) return res;
+        res[0] = right;
         right = nums.length - 1;
-        while (left < right) {
-            int mid = left + (right + 1 - left) / 2;
-            if (nums[mid] <= target) left = mid;
-            else right = mid - 1;
+        
+        //find right boundary
+        while(left < right){
+            //找右边界，mid取上平均值
+            int mid = left + (right - left+1) / 2;
+            if(nums[mid] > target)
+                right = mid - 1; //不会漏掉右边界
+            else if(nums[mid] < target)
+                left = mid + 1; //不会漏掉右边界
+            else 
+                left = mid;//此时nums[mid] = target, mid有是右边界的可能，由于是求右边界，向右收缩，故缩小left = mid 而不是mid+1
         }
         res[1] = left;
         return res;
     }
 }
+        
+```
+        
