@@ -54,5 +54,37 @@ class Solution {
 }
 ```
 **Method 2 : DP**
-求极值问题一般想到DP或Greedy，显然Greedy在这里不太适用，只有用DP了。
-http://bangbingsyb.blogspot.com/2014/11/leetcode-longest-valid-parentheses.html
+求极值问题一般想到DP或Greedy
+
+1. Notation: DP[i] = 以s[i]为结尾的longest valid parentheses substring的长度。
+2. Recurrence:
+  * if s[i] = '(', DP[i] = 0. Because any string end with '(' cannot be a valid one
+  * if s[i] = ')'
+    * if s[i-1] = '(', DP[i] = DP[i-2] + 2
+    * if s[i-1] = ')' and s[i-DP[i-1]-1] = '(', DP[i] = DP[i-1] + 2 + DP[i-DP[i-1]-2]
+    * i-DP[i-1]-1 意思是找到匹配s[i-1]的'('的位置再往前一个，若是'('，则与s[i]匹配，整个子串有效
+    
+For example, input “()(())”, at i = 5, DP array is [0,2,0,0,2,0], longest[5] = longest[4] + 2 + longest[1] = 6.
+
+
+```
+class Solution {
+    public int longestValidParentheses(String s) {
+        if(s.length() <= 1) return 0;
+        int[] dp = new int[s.length()];
+        int result = 0;
+        int leftCount = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                leftCount++;
+            } else if (leftCount > 0){
+                dp[i] = dp[i - 1] + 2;
+                dp[i] += (i - dp[i]) >= 0 ? dp[i - dp[i]] : 0;
+                result = Math.max(result, dp[i]);
+                leftCount--;
+            }
+        }
+        return result;
+    }
+}
+```
