@@ -9,6 +9,11 @@ Include all my solutions and explanations for the Leetcode coding problems
 
 | # | Title | Difficulty |
 |---| ----- | ---------- |
+|39|[Combination Sum](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/039CombinationSum.md)|Medium|
+|38|[Count and Say](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/038CountandSay.md)|Easy|
+|37|[Sudoku Solver](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/037SudokuSolver.md)|Hard|
+|36|[Valid Sudoku](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/036ValidSudoku.md)|Medium|
+|35|[Search Insert Position](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/035SearchInsertPosition.md)|Easy|
 |34|[Find First and Last Position of Element in Sorted Array](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/034FindFirstandLastPositionofElementinSortedArray.md)|Medium|
 |33|[Search in Rotated Sorted Array](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/033SearchinRotatedSortedArray.md)|Medium|
 |32|[Longest Valid Parentheses](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/032LongestValidParentheses.md)|Hard|
