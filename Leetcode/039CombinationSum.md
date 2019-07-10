@@ -27,3 +27,29 @@ class Solution {
     }
 }
 ```
+
+```
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> tmp = new ArrayList<>();
+        dfs(res, tmp, 0, target, candidates);
+        
+        return res;
+    }
+    
+    void dfs(List<List<Integer>> res, List<Integer> tmp, int current, int target, int[] candidates){
+        if(target < 0) return;
+        if(target == 0){
+            res.add(new ArrayList<>(tmp));
+            return;
+        }
+        
+        for(int i = current; i < candidates.length; i++){
+            tmp.add(candidates[i]);
+            dfs(res, tmp, i, target - candidates[i], candidates);
+            tmp.remove(tmp.size()-1);
+        }
+    }
+}
+```
