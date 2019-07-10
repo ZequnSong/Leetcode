@@ -42,6 +42,7 @@ Include all my solutions and explanations for the Leetcode coding problems
 |9|[Palindrome Number](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/009PalindromeNumber.md)|Easy|
 |8|[String to Integer (atoi)](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/008StringtoInteger.md)|Medium|
 |7|[Reverse Integer](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/007ReverseInteger.md)|Easy|
+|6|[ZigZag Conversion](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/006ZigZagConversion.md)|Medium|
 |5|[Longest Palindromic Substring](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/005LongestPalindromicSubstring.md)|Medium|
 |4|[Median of Two Sorted Arrays](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/004MedianofTwoSortedArrays.md)|Hard|
 |3|[Longest Substring Without Repeating Characters](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/003LongestSubstringWithoutRepeatingCharacters.md)|Medium|
