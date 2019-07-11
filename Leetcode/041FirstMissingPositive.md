@@ -1,7 +1,27 @@
 # First Missing Positive
 
+Given an unsorted integer array, find the smallest missing positive integer.
 
-* 时间复杂度O(n),空间复杂度O(1)
+**Example 1:**
+```
+Input: [1,2,0]
+Output: 3
+```
+**Example 2:**
+```
+Input: [3,4,-1,1]
+Output: 2
+```
+**Example 3:**
+```
+Input: [7,8,9,11,12]
+Output: 1
+```
+**Note:**
+
+Your algorithm should run in **O(n)** time and uses **constant extra space**.
+
+**时间复杂度O(n),空间复杂度O(1)**
 
 * 不能建立新的数组，那么只能覆盖原有数组
 * 思路是先遍历一遍数组，把1放在数组第一个位置nums[0]，2放在第二个位置nums[1]，即需要把nums[i]放在nums[nums[i] - 1]上
@@ -49,7 +69,7 @@ class Solution {
 }
 ```
 
-* 时间复杂度O(n),空间复杂度O(n)
+**时间复杂度O(n),空间复杂度O(n)**
 * 同样思路，新建了一个数组来判断每个值是否存在
 ```
 class Solution {
