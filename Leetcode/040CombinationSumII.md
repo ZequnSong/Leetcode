@@ -31,7 +31,19 @@ A solution set is:
 ]
 ```
 
-```
+**思路：**
+类似 [39. Combination Sum](https://github.com/ZequnSong/Leetcode/edit/master/Leetcode/039CombinationSum.md)
+
+不同之处：1). 给定数组中每个数最多只能用一次 2). 给定数组中可能含有重复元素
+
+* 给数组排序，便于去重
+* 递归函数for循环中，若当前数值与之前数值相等，则continue跳过
+  * 例如： 2，2，2，4
+  * 当前current处于第一个2时，会探索所有包含2的可能组合：(2),(2,2),(2,2,2),(2,2,2,4),(2,2,4),(2,4)
+  * 所以为了去掉重复，当遍历current之后的数值时，需要跳过和之前相等的数值，因此后面的两个2会直接跳过
+* 由于每个数最多只能用一次，递归调用时current=i+1 而不是i，意味着当前数只取一次就跳到下一个数
+
+``` 
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
@@ -50,26 +62,12 @@ class Solution {
         }
         
         for(int i = current; i < candidates.length; i++){
-            if(i+1 < candidates.length && candidates[i] == candidates[i+1]){
-                int count = 1;
-                int j = i;
-                tmp.add(candidates[j]);
-                while(j + 1 < candidates.length && candidates[j] == candidates[j+1]){
-                    tmp.add(candidates[j++]);
-                    count++;
-                }
-                dfs(res, tmp, j+1, target - candidates[i]*count, candidates);
-                while(count>0){
-                    tmp.remove(tmp.size() - 1);
-                    count--;
-                }
-                    
-            }
-            else{
-                tmp.add(candidates[i]);          
-                dfs(res, tmp, i+1, target - candidates[i], candidates);
-                tmp.remove(tmp.size() - 1);           
-            }
+            if(i > current && candidates[i] == candidates[i-1])
+                continue;
+            tmp.add(candidates[i]);          
+            dfs(res, tmp, i+1, target - candidates[i], candidates);
+            tmp.remove(tmp.size() - 1);  
+            
         }
     }
 }
