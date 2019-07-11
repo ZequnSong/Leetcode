@@ -32,7 +32,7 @@ A solution set is:
 ```
 
 **思路：**
-类似 [39. Combination Sum](https://github.com/ZequnSong/Leetcode/edit/master/Leetcode/039CombinationSum.md)
+类似 [39. Combination Sum](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/039CombinationSum.md)
 
 不同之处：1). 给定数组中每个数最多只能用一次 2). 给定数组中可能含有重复元素
 
