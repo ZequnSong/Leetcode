@@ -118,7 +118,7 @@ class Solution {
 </br>
 </br>
 
-**DP思路:**
+**DP思路: **
 为了方便，将s和p转为char数组
 m和n代表字符串s和p的长度
 
