@@ -119,53 +119,44 @@ class Solution {
 </br>
 
 **DP思路: **
-为了方便，将s和p转为char数组
-m和n代表字符串s和p的长度
 
-* dp[i][j] 表示s[0..i)与p[0..j)是否匹配
+* dp[i][j] 表示s[0..i-1]与p[0..j-1]是否匹配
+* 因为dp空间为dp[m+1][n+1]，行列各多出一行，代表字符串为空时的情况，所以i实际对应s[i-1]，j对应p[j-1]
 
 * 通过分析写出递推式如下：
   * dp[0][0] = true，表示若s和p为空，匹配
   * dp[i][0] = false, i > 0, 表示若p为空，s非空，不匹配 (由于默认false，可省略此步)
   
   * 若p的当前字符p[j-1]不是'*'
-    * 若s当前有值，且当前字符s[i-1] == p的当前字符p[j-1] 或p的当前字符p[j-1]=='.'，则dp[i][j] == dp[i-1][j-1]
+    * s当前必须有值，且当前字符s[i-1] == p的当前字符p[j-1] 或p的当前字符p[j-1]=='.'，则dp[i][j] == dp[i-1][j-1]
     * 否则 dp[i][j] = false
     
   * 若p的当前字符p[j-1]是'*'
-    * 若dp[i][j-2]==true, 说明若'*'重复0次，则可令dp[i][j]匹配
-    * 若s当前有值，且dp[i-1][j]==true，且当前字符s[i-1]与p的星号之前的字符p[j-2]相等 或 p[j-2]的等于'.'，说明若星号重复至少一次，则可令dp[i][j]匹配
+    * 情况1： 星号重复0次。 若dp[i][j-2]==true, 说明若'*'令前一个字符重复0次，则可令dp[i][j]匹配
+    * 情况2： 星号重复至少一次。若s当前有值，且dp[i-1][j]==true，且当前字符s[i-1]与p的星号之前的字符p[j-2]相等 或 p[j-2]的等于'.'，说明若星号重复至少一次，则可令dp[i][j]匹配
     * 否则 dp[i][j] = false
 * dp[m][n] 为最终结果
-
 
 ```
 class Solution {
     public boolean isMatch(String s, String p) {
         int m = s.length();
         int n = p.length();
-        char[] ss = s.toCharArray();
-        char[] pp = p.toCharArray();
-        boolean[][] dp = new boolean[m + 1][n + 1];
-        dp[0][0] = true;
 
-        for (int i = 0; i <= m; ++i) {
-            for (int j = 1; j <= n; ++j) {
-                if (j == 0) {
-                    continue;//default false
+        boolean[][] dp = new boolean[m+1][n+1];
+        dp[0][0] = true;
+        
+        for(int i = 0; i <= m; i++){
+            for(int j = 1; j <= n; j++){
+                if(p.charAt(j-1) != '*'){
+                    if(i>0 && (s.charAt(i-1) == p.charAt(j-1) || p.charAt(j-1) == '.'))
+                        dp[i][j] = dp[i-1][j-1];
                 }
-                if (pp[j - 1] != '*') {
-                    if(i > 0 && (ss[i - 1] == pp[j - 1] || pp[j - 1] == '.'))
-                        dp[i][j] = dp[i - 1][j - 1];
-                    else
-                        continue;//default false
-                } else {
-                    if(dp[i][j - 2])
+                else{
+                    if(dp[i][j-2])
                         dp[i][j] = true;
-                    else if(i > 0 && dp[i-1][j] &&  (ss[i - 1] == pp[j - 2] || pp[j - 2] == '.'))
+                    else if(i > 0 && dp[i-1][j] && (s.charAt(i-1) == p.charAt(j-2) || p.charAt(j-2) == '.'))
                         dp[i][j] = true;
-                    else
-                        continue;                              
                 }
             }
         }
