@@ -28,8 +28,8 @@ You can assume that you can always reach the last index.
     * 如果max大于等于nums边界，说明此时可以达到终点，nums[i]到达nums[cur]，nums[cur]到达终点，步数为2，则res+2返回
   * 令i等于cur，即从nums[i]走一步到达其范围内能jump最远距离的点nums[cur]，res加1，继续遍历数组nums
   
-  ```
-  class Solution {
+```
+ class Solution {
     public int jump(int[] nums) {
         int res = 0;
         if(nums.length == 1)
