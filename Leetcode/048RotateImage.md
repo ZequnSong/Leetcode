@@ -25,7 +25,12 @@ rotate the input matrix in-place such that it becomes:
 ]
 ```
 
+**思路：**
 
+* 对于当前位置matrix[i][j]，计算旋转后的新位置，然后再计算下一个新位置，第四个位置又变成当前位置了，每次循环换四个数字，如下所示：
+![](/pictures/question_48.jpeg)
+
+* 每遍历一次i，都会旋转当前所在的一环
 
 ```
 class Solution {
