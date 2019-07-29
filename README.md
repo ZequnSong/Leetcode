@@ -9,6 +9,16 @@ Include all my solutions and explanations for the Leetcode coding problems
 
 | # | Title | Difficulty |
 |---| ----- | ---------- |
+|51|[]()||
+|50|[Pow(x,n)](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/050Pow(x%2Cn).md)|Medium|
+|49|[Group Anagrams](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/049GroupAnagrams.md)|Medium|
+|48|[Rotate Image](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/048RotateImage.md)|Medium|
+|47|[Permutations II](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/047PermutationsII.md)|Medium|
+|46|[Permutations](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/046Permutations.md)|Medium|
+|45|[Jump Game II](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/045JumpGameII.md)|Hard|
+|44|[Wildcard Matching](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/044WildcardMatching.md)|Hard|
+|43|[Multiply Strings](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/043MultiplyStrings.md)|Medium|
+|42|[Trapping Rain Water](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/042TrappingRainWater.md)|Hard|
 |41|[First Missing Positive](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/041FirstMissingPositive.md)|Hard|
 |40|[Combination Sum II](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/040CombinationSumII.md)|Medium|
 |39|[Combination Sum](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/039CombinationSum.md)|Medium|
