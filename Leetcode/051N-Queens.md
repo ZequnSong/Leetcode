@@ -22,6 +22,7 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 ```
 
 **思路：简单回溯**
+
 一行一行的来放置queen，每个queen有n个可能的位置：0到n-1
 
 * 先建立一个长度为 nxn 的全是点的数组 board，然后从第0行(第一个queen)开始调用递归。
