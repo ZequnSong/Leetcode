@@ -1,0 +1,73 @@
+# Maximum Subarray
+
+Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+
+**Example:**
+```
+Input: [-2,1,-3,4,-1,2,1,-5,4],
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.
+```
+
+思路1：O(n)
+
+* 定义两个变量res和curSum，其中res保存最终要返回的结果，即最大的子数组之和，curSum初始值为0
+* 每遍历一个数字num，比较curSum + num和num中的较大值存入curSum，然后再把res和curSum中的较大值存入res
+* 以此类推直到遍历完整个数组，可得到最大子数组的值存在res中
+
+```
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int res = Integer.MIN_VALUE;
+        int curSum = 0;
+        
+        for(int i = 0; i < nums.length; i++){
+            curSum = Math.max(curSum+nums[i], nums[i]);
+            res = Math.max(curSum, res);
+        }
+        return res;
+    }
+}
+```
+
+思路2：Divide and Conquer
+
+* Step1. Select the middle element of the array.
+So the maximum subarray may contain that middle element or not.
+
+* Step 2.1 If the maximum subarray does not contain the middle element, then we can apply the same algorithm to the the subarray to the left of the middle element and the subarray to the right of the middle element.
+
+* Step 2.2 If the maximum subarray does contain the middle element, then the result will be simply the maximum suffix subarray of the left subarray plus the maximum prefix subarray of the right subarray
+
+* Step 3 return the maximum of those three answer.
+
+把数组一分为二，分别找出左边和右边的最大子数组之和，然后还要从中间开始向左右分别扫描，求出的最大值分别和左右两边得出的最大值相比较取最大的那一个
+
+
+```
+public class Solution {
+    public int maxSubArray(int[] nums) {
+        if (nums.length == 0) return 0;
+        return helper(nums, 0, nums.length - 1);
+    }
+    public int helper(int[] nums, int left, int right) {
+        if (left >= right) return nums[left];
+        int mid = left + (right - left) / 2;
+        int lmax = helper(nums, left, mid - 1);
+        int rmax = helper(nums, mid + 1, right);
+        int mmax = nums[mid], t = mmax;
+        for (int i = mid - 1; i >= left; --i) {
+            t += nums[i];
+            mmax = Math.max(mmax, t);
+        }
+        t = mmax;
+        for (int i = mid + 1; i <= right; ++i) {
+            t += nums[i];
+            mmax = Math.max(mmax, t);
+        }
+        return Math.max(mmax, Math.max(lmax, rmax));
+    }
+}
+```
+
+
