@@ -32,16 +32,10 @@ class Solution {
 
 思路2：Divide and Conquer
 
-* Step1. Select the middle element of the array.
-So the maximum subarray may contain that middle element or not.
-
-* Step 2.1 If the maximum subarray does not contain the middle element, then we can apply the same algorithm to the the subarray to the left of the middle element and the subarray to the right of the middle element.
-
-* Step 2.2 If the maximum subarray does contain the middle element, then the result will be simply the maximum suffix subarray of the left subarray plus the maximum prefix subarray of the right subarray
-
-* Step 3 return the maximum of those three answer.
-
-把数组一分为二，分别找出左边和右边的最大子数组之和，然后还要从中间开始向左右分别扫描，求出的最大值分别和左右两边得出的最大值相比较取最大的那一个
+* 把数组一分为二
+* 若中间的数不在最大子数组内，分别找出左边和右边的最大子数组之和,
+* 若中间的数在最大子数组内，从中间开始向左右分别扫描
+* 求出的最大值分别和左右两边得出的最大值相比较取最大的那一个
 
 
 ```
