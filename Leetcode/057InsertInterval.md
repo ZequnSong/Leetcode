@@ -38,7 +38,7 @@ Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
       * 若右边位于新区间内，将新区间左边扩更为该区间的左边
 * 若遍历到最后一个区间，说明新区间后再无区间，将新区间加入后返回res即可
 
-<img src="/pictures/question_57.jpg" width="200">
+<img src="/pictures/question_57.jpg" width="400">
 
 ```
 class Solution {
