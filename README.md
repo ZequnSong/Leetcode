@@ -9,7 +9,13 @@ Include all my solutions and explanations for the Leetcode coding problems
 
 | # | Title | Difficulty |
 |---| ----- | ---------- |
-|51|[]()||
+|57|[Insert Interval](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/057InsertInterval.md)|Hard|
+|56|[Merge Intervals](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/056MergeIntervals.md)|Medium|
+|55|[Jump Game](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/055JumpGame.md)|Medium|
+|54|[Spiral Matrix](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/054SpiralMatrix.md)|Medium|
+|53|[Maximum Subarray](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/053MaximumSubarray.md)|Easy|
+|52|[N Queens II](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/052N-QueensII.md)|Hard|
+|51|[N Queens](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/051N-Queens.md)|Hard|
 |50|[Pow(x,n)](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/050Pow(x%2Cn).md)|Medium|
 |49|[Group Anagrams](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/049GroupAnagrams.md)|Medium|
 |48|[Rotate Image](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/048RotateImage.md)|Medium|
