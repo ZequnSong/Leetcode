@@ -62,8 +62,10 @@ class Solution {
 * trim()去掉字符串头尾的空白符
 * lastIndexOf(" ")返回最后一个空格的下标，若无空格，返回-1
 
+```
 class Solution {
     public int lengthOfLastWord(String s) {
         return s.trim().length()-s.trim().lastIndexOf(" ")-1;
     }
 }
+```
