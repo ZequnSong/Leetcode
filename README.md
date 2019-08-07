@@ -9,6 +9,15 @@ Include all my solutions and explanations for the Leetcode coding problems
 
 | # | Title | Difficulty |
 |---| ----- | ---------- |
+|66|[Plus One](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/066PlusOne.md)|Easy|
+|65|[Valid Number](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/065ValidNumber.md)|Hard|
+|64|[Minimum Path Sum](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/064MinimumPathSum.md)|Medium|
+|63|[Unique Paths II](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/063UniquePathsII.md)|Medium|
+|62|[Unique Paths](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/062UniquePaths.md)|Medium|
+|61|[Rotate List](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/061RotateList.md)|Medium|
+|60|[Permutation Sequence](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/060PermutationSequence.md)|Medium|
+|59|[Spiral Matrix II](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/059SpiralMatrixII.md)|Medium|
+|58|[Length of Last Word](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/058LengthofLastWord.md)|Easy|
 |57|[Insert Interval](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/057InsertInterval.md)|Hard|
 |56|[Merge Intervals](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/056MergeIntervals.md)|Medium|
 |55|[Jump Game](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/055JumpGame.md)|Medium|
