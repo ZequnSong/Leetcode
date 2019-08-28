@@ -16,7 +16,9 @@ matrix = [
 target = 3
 Output: true
 ```
+两次二分法，时间复杂度O(logm + logn)
 
+第一次定位行，第二次定位列
 
 ```
 class Solution {
