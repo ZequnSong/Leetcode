@@ -42,3 +42,27 @@ class Solution {
 
 方法二： one pass 遍历一遍数组
 
+* 用双指针，分别从原数组的首尾往中心移动。
+* 定义red指针指向开头位置，blue指针指向末尾位置。
+* 从头开始遍历原数组
+  * 如果遇到0，则交换该值和red指针指向的值，并将red指针后移一位
+  * 若遇到2，则交换该值和blue指针指向的值，并将blue指针前移一位
+  * 若遇到1，则继续遍历。
+
+```
+class Solution {
+    public void sortColors(int[] nums) {
+        int red = 0, blue = nums.length-1;
+        for(int i = 0; i <= blue; i++){
+            if(nums[i] == 0){
+                nums[i] = nums[red];
+                nums[red++] = 0;
+            }
+            if(nums[i] == 2){
+                nums[i--] = nums[blue];
+                nums[blue--] = 2;
+            }                
+        }           
+    }
+}
+```
