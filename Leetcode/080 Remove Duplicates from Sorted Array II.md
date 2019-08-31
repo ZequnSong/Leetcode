@@ -15,7 +15,9 @@ It doesn't matter what values are set beyond the returned length.
 思路：
 
 此题要求in-place，空间复杂度为O(1)
-**变量count：** 录每个数字出现了几次，
+
+**变量count：** 记录每个数字出现了几次
+
 **变量idx：**只要有数字重复了超过两次，由于数组升序排列，所以从重复的数字开始往后所有的位置都需要in-place替换，idx指向第一个重复的数字的下标
 遍历一次解决
 
