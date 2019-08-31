@@ -24,7 +24,7 @@ Output:
 
 找到所有子集，元素先后顺序不影响结果
 
-<img src="/pictures/question_78.png" width="300">
+<img src="/pictures/question_78.png" width="150">
 
 * 每次调用dfs先直接往res里添加tmp结果
 * 每次调用dfs，循环时i从start开始
