@@ -33,25 +33,23 @@ A solution set is:
 ```
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();    
         Arrays.sort(nums);
         for(int i = 0; i < nums.length - 2; i++){
-            if(nums[i]>0) break;
-            int fix = nums[i];
-            if(i>0  && nums[i] == nums[i-1])
-                continue;
-            int low = i + 1, high = nums.length - 1;
-            while(low < high){
-                if(nums[low] + nums[high] == -nums[i]){
-                    res.add(Arrays.asList(nums[i],nums[low],nums[high]));
-                    while(low < high && nums[low] == nums[low + 1]) low++;
-                    while(low < high && nums[high] == nums[high - 1]) high--;
-                    low++;
-                    high--;
-                }else if(nums[low] + nums[high] > -nums[i])
-                    high--;
+            if(nums[i] > 0) break;
+            if( i > 0 && nums[i] == nums[i-1]) continue;         
+            int left = i + 1, right = nums.length - 1;       
+            while(left<right){
+                if(nums[left] + nums[right] + nums[i] == 0){
+                    res.add(Arrays.asList(nums[i],nums[left],nums[right]));
+                    while(left < right && nums[left+1] == nums[left]) left++;
+                    while(left < right && nums[right] == nums[right-1]) right--;
+                    left++;
+                    right--;
+                }else if(nums[left] + nums[right] + nums[i] < 0)
+                    left++;
                 else
-                    low++;              
+                    right--; 
             }
         }
         return res;
