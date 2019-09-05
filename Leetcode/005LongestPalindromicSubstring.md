@@ -92,31 +92,25 @@ O(n^2)思路：Dynamic Programming
     
 ```    
 class Solution {
-    public static String longestPalindrome(String s) {
-        if (s.isEmpty()) return "";
-        int left = 0, right = 0, len = 0;
-        int[][] dp = new  int[s.length()][s.length()];
-        
-        for(int i = 0; i < s.length(); i++)
-            dp[i][i] = 1;
-            
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = 0; j < i; j++) {
-                if(i == j + 1 && (s.charAt(i) == s.charAt(j)))
-                    dp[i][j] = 1;
-                else if(i > j + 1 && (s.charAt(i) == s.charAt(j)) && dp[i - 1][j + 1] == 1 )
-                    dp[i][j] = 1;
-                else
-                    dp[i][j] = 0;   
-                //dp[i][j] = ((s.charAt(i) == s.charAt(j)) && ((i - j) < 2 || dp[i - 1][j + 1]==1)) ? 1 : 0;
-                if (dp[i][j]==1 && len < i - j + 1) {
-                    len = i - j + 1;
-                    left = j;
-                    right = i;
+    public String longestPalindrome(String s) {
+        if(s.length() <= 1) return s;    
+        int[][] dp = new int[s.length()][s.length()];
+        int maxLen = 0, start = 0;
+        for(int i = 0; i < s.length(); i++) dp[i][i] = 1;       
+        for(int i = 0; i < s.length(); i++){
+            for(int j = 0; j < s.length(); j++){
+                if(i == j + 1 && s.charAt(j) == s.charAt(i))
+                    dp[i][j] = 1;                
+                if(i > j + 1)
+                    if(s.charAt(j) == s.charAt(i) && dp[i-1][j+1] == 1)
+                        dp[i][j] = 1;                         
+                if(dp[i][j] == 1 && maxLen < i - j + 1){
+                    start = j;
+                    maxLen = i - j + 1;
                 }
             }
         }
-        return s.substring(left, right + 1);
+        return s.substring(start, start + maxLen);
     }
 }
 ```
