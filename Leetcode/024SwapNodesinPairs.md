@@ -32,24 +32,21 @@ Given 1->2->3->4, you should return the list as 2->1->4->3.
  */
 class Solution {
     public ListNode swapPairs(ListNode head) {
-        ListNode dummy = new ListNode(-1);
-        ListNode pre = dummy;
-        dummy.next = head;
-        
-        ListNode left, right;
-        
-        while(pre.next != null && pre.next.next != null){
-            left = pre.next;
-            right = pre.next.next;
-            
-            pre.next = right;
-            left.next = right.next;
-            right.next = left;
-            pre = left;
-        }
+        if(head == null || head.next == null) return head;       
+        ListNode dummy= new ListNode(0), pre = dummy, cur = head, next = head.next;
+        dummy.next = head;  
+        while(cur != null && next != null){
+            cur.next = next.next;
+            next.next = cur;
+            pre.next = next;
+            pre = cur;
+            cur = cur.next;
+            if(cur != null)
+                next = cur.next;
+        }      
         return dummy.next;
-    }
         
+    }
 }
 ```
 
