@@ -13,11 +13,11 @@ Given 1->2->3->4, you should return the list as 2->1->4->3.
 **Method 1: non-recursive, Three pointers:**
 * before
 
-...->pre->left->right->...
+...->pre->cur->next->...
 
 * after
 
-...->pre->right->left->...
+...->pre->next->cur->...
 
 
 
