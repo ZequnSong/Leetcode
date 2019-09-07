@@ -48,3 +48,58 @@ class Solution {
     }
 }
 ```
+
+思路：空间复杂度O(1)
+
+不能新建数组，用原数组的第一行第一列来记录各行各列是否有0.
+
+- 先扫描第一行第一列，如果有0，则将各自的flag设置为true
+- 然后扫描除去第一行第一列的整个数组，如果有0，则将对应的第一行和第一列的数字赋0
+- 再次遍历除去第一行第一列的整个数组，如果对应的第一行和第一列的数字有一个为0，则将当前值赋0
+- 最后根据第一行第一列的flag来更新第一行第一列
+```
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        if(matrix.length == 0 || matrix[0].length == 0) return;
+        
+        boolean rowZero = false, colZero = false;
+        for(int i = 0; i < matrix.length; i++)
+            if(matrix[i][0] == 0){
+                colZero = true;
+                break;
+            }
+        for(int i = 0; i < matrix[0].length; i++)
+            if(matrix[0][i] == 0){
+                rowZero = true;
+                break;
+            }
+        
+        for(int i = 1; i < matrix.length; i++){
+            for(int j = 1; j < matrix[0].length; j++){
+                if(matrix[i][j] == 0){
+                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;
+                }
+            }
+        }
+        
+        for(int i = 1; i < matrix.length; i++)
+            if(matrix[i][0] == 0)
+                for(int j = 1; j < matrix[0].length; j++)
+                    matrix[i][j] = 0;
+    
+        
+        for(int i = 1; i < matrix[0].length; i++)
+            if(matrix[0][i] == 0)
+                for(int j = 1; j < matrix.length; j++)
+                    matrix[j][i] = 0;
+            
+        if(rowZero)
+            for(int j = 0; j < matrix[0].length; j++)
+                    matrix[0][j] = 0;
+        if(colZero)
+            for(int j = 0; j < matrix.length; j++)
+                    matrix[j][0] = 0;
+    }
+}
+```
