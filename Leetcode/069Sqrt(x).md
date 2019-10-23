@@ -20,22 +20,22 @@ Explanation: The square root of 8 is 2.82842..., and since
 ```
 二分法
 
-注意判断时用mid > x/mid 而不是 mid*mid > x, 以为可能x为mid*mid可能越界溢出造成无法比较大小
+**注意判断时用mid > x/mid 而不是 mid*mid > x, 以为可能x为mid*mid可能越界溢出造成无法比较大小**
 ```
 class Solution {
     public int mySqrt(int x) {
-        if(x<=1) return x;
+        if(x==0) return 0;
         int left = 1, right = x;
-        int res = -1;
-        while(left < right){
-            int mid = left + (right - left + 1)/2;
-            if(mid*mid == x) return mid;
-            if(mid > x/mid )
-                right = mid - 1;
-            else
+        while(left + 1 < right){
+            int mid = left + (right - left)/2;
+            if(mid == x/mid) return mid;
+            if(mid < x/mid) 
                 left = mid;
+            else 
+                right = mid;
         }
-        return left;
+        if(right <= x/right) return right;
+        else return left;
     }
 }
 ```
