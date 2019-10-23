@@ -32,31 +32,32 @@ Output: 0
 ---
 
 二分法
-* mid = left + (right - left) / 2 向下取整中值
-* 若nums[mid]等于target，直接找到，返回
-* 若nums[mid]大于target，右边界左移至mid - 1, 小于target，左边界右移至 mid + 1;
-* 当最后left=right
-  * 若此点小于target，应在此点的下一个位置插入，此时left=mid+1=left+1 即返回left即可
-  * 若此点大于target，应在此点插入，此时left没变，则返回left即可
+* 若找到，返回对应index
+* 若没找到，分情况找到对应插入下标
 
 ```
 class Solution {
     public int searchInsert(int[] nums, int target) {
-        if(nums.length == 0) return 0;
-        int left = 0;
-        int right = nums.length - 1;
-
-        while(left <= right){
-            int mid = left + (right - left) / 2;
-            
+        if(nums == null || nums.length == 0) return 0;
+        int left = 0, right = nums.length - 1;
+        while(left + 1 < right){
+            int mid = left + (right - left)/2;
             if(nums[mid] == target) return mid;
-            if(nums[mid] < target){
-                left = mid + 1;
-            }else{
-                right = mid - 1;
-            }
+            if(nums[mid] < target)
+                left = mid;
+            else
+                right = mid;
         }
-        return left;
+        if(nums[left] == target)
+            return left;
+        else if(nums[right] == target)
+            return right;
+        
+        if(target < nums[left])
+            return left;
+        else if(target < nums[right])
+            return right;
+        else return right+1;
     }
 }
 ```
