@@ -22,39 +22,35 @@ Output: [-1,-1]
 ```
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int[] res = {-1,-1};        
-        if(nums.length == 0) return res;
-        int left = 0;
-        int right = nums.length - 1;
-        
-        //find left boundary
-        while(left < right){
-            //找左边界，mid取下平均值
-            int mid = left + (right - left) / 2;
-            if(nums[mid] < target)
-                left = mid + 1; //不会漏掉左边界
-            else if(nums[mid] > target)
-                right = mid - 1; //不会漏掉左边界
+        int[] res = {-1,-1};
+        if(nums == null || nums.length == 0) return res;
+        int left = 0, right = nums.length-1;
+        while(left+1<right){
+            int mid = left + (right-left)/2;
+            if(nums[mid]<target)
+                left = mid;
             else
-                right = mid;//此时nums[mid] = target,mid有是左边界的可能，由于是求左边界，向左收缩，故缩小right = mid 而不是mid+1
+                right = mid;                
         }
-        // 若不包含target，right可能会取到-1，故先测试right是否小于0
-        if(right < 0 || nums[right] != target) return res;
-        res[0] = right;
-        right = nums.length - 1;
-        
-        //find right boundary
-        while(left < right){
-            //找右边界，mid取上平均值
-            int mid = left + (right - left+1) / 2;
-            if(nums[mid] > target)
-                right = mid - 1; //不会漏掉右边界
-            else if(nums[mid] < target)
-                left = mid + 1; //不会漏掉右边界
-            else 
-                left = mid;//此时nums[mid] = target, mid有是右边界的可能，由于是求右边界，向右收缩，故缩小left = mid 而不是mid+1
+        if(nums[left] == target)
+            res[0] = left;
+        else if(nums[right] == target)
+            res[0] = right;
+        else
+            return res;
+        left = 0;
+        right = nums.length-1;
+        while(left+1<right){
+            int mid = left + (right-left)/2;
+            if(nums[mid]<=target)
+                left = mid;
+            else
+                right = mid;
         }
-        res[1] = left;
+        if(nums[right] == target)
+            res[1] = right;
+        else
+            res[1] = left;
         return res;
     }
 }
