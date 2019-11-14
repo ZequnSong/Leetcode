@@ -30,38 +30,45 @@ A solution set is:
 ```
 ---
 
-**思路：** 返回所有符合要求的解-->递归
+**思路：** 返回所有符合要求的解--> DFS
 
 题中明确给定数组中不含重复元素，因此不需预处理
 
-* 创建变量res保存所有得到的解，tmp为每一个符合的解
-* dfs递归函数，current记录当前递归到的下标，
+* dfs递归
+  * 定义：从candidates数组中的startIndex开始挑选，放到combination中，且他们的和等于target
+
+  * startIndex记录当前递归到的下标，
   * 若target小于0，说明此路不通，剪掉
-  * 若target等于0，说明找到解，此时的tmp就是一个解，将其加入到res中
-  * 将当前数组的值加入tmp，每次调用递归，从target中减去当前数组的值，由于每个数值可以允许无限重复，所以递归时current是i而不是i+1
-  * 当剪枝或找到一个解后，递归结束返回，要清空tmp中刚刚加入的数值
+  * 若target等于0，说明找到解，此时的combination就是一个解，将其加入到res中
+  * 将当前数组的值加入combination，每次调用递归，从target中减去当前数组的值，由于每个数值可以允许无限重复，所以递归时startIndex是i而不是i+1
+  * 当剪枝或找到一个解后，递归结束返回，要清空combination中刚刚加入的数值
 
 ```
 class Solution {
+    boolean findOne = false;
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
-        List<Integer> tmp = new ArrayList<>();
-        dfs(res, tmp, 0, target, candidates);
-        
-        return res;
+        if(candidates == null || candidates.length == 0) return res;
+        dfs(candidates, 0, target, new ArrayList<>(), res);
+        return res;        
     }
     
-    void dfs(List<List<Integer>> res, List<Integer> tmp, int current, int target, int[] candidates){
+    private void dfs(int[] candidates, 
+                     int startIndex, 
+                     int target,
+                     List<Integer> combination,
+                     List<List<Integer>> res){
         if(target < 0) return;
         if(target == 0){
-            res.add(new ArrayList<>(tmp));
+            res.add(new ArrayList<>(combination));
+            findOne = true;
             return;
         }
         
-        for(int i = current; i < candidates.length; i++){
-            tmp.add(candidates[i]);
-            dfs(res, tmp, i, target - candidates[i], candidates);
-            tmp.remove(tmp.size()-1);
+        for(int i = startIndex; i < candidates.length; i++){
+            combination.add(candidates[i]);
+            dfs(candidates, i, target - candidates[i], combination, res);
+            combination.remove(combination.size()-1);
         }
     }
 }
