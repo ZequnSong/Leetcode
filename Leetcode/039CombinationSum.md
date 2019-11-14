@@ -45,7 +45,6 @@ A solution set is:
 
 ```
 class Solution {
-    boolean findOne = false;
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
         if(candidates == null || candidates.length == 0) return res;
@@ -61,7 +60,6 @@ class Solution {
         if(target < 0) return;
         if(target == 0){
             res.add(new ArrayList<>(combination));
-            findOne = true;
             return;
         }
         
