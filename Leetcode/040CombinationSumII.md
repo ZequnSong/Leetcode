@@ -39,35 +39,37 @@ A solution set is:
 * 给数组排序，便于去重
 * 递归函数for循环中，若当前数值与之前数值相等，则continue跳过
   * 例如： 2，2，2，4
-  * 当前current处于第一个2时，会探索所有包含2的可能组合：(2),(2,2),(2,2,2),(2,2,2,4),(2,2,4),(2,4)
-  * 所以为了去掉重复，当遍历current之后的数值时，需要跳过和之前相等的数值，因此后面的两个2会直接跳过
-* 由于每个数最多只能用一次，递归调用时current=i+1 而不是i，意味着当前数只取一次就跳到下一个数
+  * 当前startIndex处于第一个2时，会探索所有包含2的可能组合：(2),(2,2),(2,2,2),(2,2,2,4),(2,2,4),(2,4)
+  * 所以为了去掉重复，当遍历startIndex之后的数值时，需要跳过和之前相等的数值，因此后面的两个2会直接跳过
+* 由于每个数最多只能用一次，递归调用时startIndex=i+1 而不是i，意味着当前数只取一次就跳到下一个数
 
 ``` 
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
-        List<Integer> tmp = new ArrayList<>();
+        if(candidates == null || candidates.length == 0) return res;
         
         Arrays.sort(candidates);
-        dfs(res, tmp, 0, target, candidates);
-        return res;        
+        dfs(0, target, candidates, new ArrayList<>(), res);
+        return res;
     }
     
-    private void dfs(List<List<Integer>> res, List<Integer> tmp, int current, int target, int[] candidates){
-        if(target < 0) return;
-        if(target == 0){
+    private void dfs(int startIndex,
+                     int remainTarget,
+                     int[] candidates,
+                     List<Integer> tmp,
+                     List<List<Integer>> res){
+        if(remainTarget < 0) return;
+        if(remainTarget == 0){
             res.add(new ArrayList<>(tmp));
             return;
         }
         
-        for(int i = current; i < candidates.length; i++){
-            if(i > current && candidates[i] == candidates[i-1])
-                continue;
-            tmp.add(candidates[i]);          
-            dfs(res, tmp, i+1, target - candidates[i], candidates);
-            tmp.remove(tmp.size() - 1);  
-            
+        for(int i = startIndex; i < candidates.length; i++){
+            if(i > startIndex && candidates[i] == candidates[i-1]) continue;
+            tmp.add(candidates[i]);
+            dfs(i+1, remainTarget - candidates[i], candidates, tmp, res);
+            tmp.remove(tmp.size()-1);
         }
     }
 }
