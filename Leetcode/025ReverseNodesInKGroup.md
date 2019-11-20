@@ -15,62 +15,48 @@ For k = 3, you should return: 3->2->1->4->5
 * You may not alter the values in the list's nodes, only nodes itself may be changed.
 
 ---
-**思路1：**
+**思路：**
 * 处理链表问题，一般在开头加dummy节点，以防止头节点丢失
 * pre 作为每组节点的头节点
-* cur指针每移动k次，说明pre(不包括pre)和cur(包括cur)之间有k个节点，对这组节点进行反转
-* 反转函数：
-  * last指针指向该组节点的开头，即pre.next，反转过后该节点会变成该组最后一个节点，故名为last
-  * 每次将last后的一个节点cur反转到前面，即pre和last之间，如：
-  * -1-->1-->2-->3-->4-->5-->6-->next
-  * pre &nbsp;last &nbsp;cur
-  * -1-->2-->1-->3-->4-->5-->6-->next
-  * pre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    last &nbsp;cur
-  * 直到cur等于next为止，则完成了一组的反转
-  * -1-->6-->5-->4-->3-->2-->1-->next
-  * pre &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;    last &emsp;&nbsp;cur
-* 反转结束后，更新pre为上组反转后的最后一个节点last，更新cur为pre.next，继续移动cur
+* cur指针每移动k次，说明pre(不包括pre)和cur(包括cur)之间有k个节点，对这组节点进行反转， 更新pre和cur
+* 不够k次时，pre不动
 
+* 反转函数：将startAfter和endBefore之间的节点反转
+  * startAfter -> n1 -> n2 -> n3 ... nk -> endBefore
+  * //=> 翻转之后
+  * startAfter -> nk -> nk-1 -> ... -> n1 -> endBefore
+  * 和[Reverse Linked List](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/206.%20Reverse%20Linked%20List.md)不同的是我们要返回n1作为新的pre，而不是返回反转后的新头节点nk，我们可以一开始直接存储n1 = startAfter.next，反转结束后返回该节点即可
+  
 ```
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
-        if(head == null || k == 1) return head;
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
-        
         ListNode pre = dummy, cur = head;
-        
         for(int i = 1; cur != null; i++){
             if(i % k == 0){
-                pre = reverseOneGroup(pre, cur.next);
+                pre = reverse(pre, cur.next);
                 cur = pre.next;
             }
             else{
                 cur = cur.next;
             }
         }
-        
         return dummy.next;
-        
     }
     
-    ListNode reverseOneGroup(ListNode pre, ListNode next){
-        ListNode last = pre.next, cur = last.next;
-        while(cur != next){
-            last.next = cur.next;
-            cur.next = pre.next;
-            pre.next = cur;
-            cur = last.next;
+    private ListNode reverse(ListNode startAfter, ListNode endBefore){
+        ListNode pre = startAfter, cur = pre.next, next = null;
+        ListNode res = startAfter.next;
+        while(cur!=endBefore){
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
         }
-        return last;
+        startAfter.next.next = endBefore;
+        startAfter.next = pre;
+        return res;
     }
 }
 ```
