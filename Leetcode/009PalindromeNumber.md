@@ -30,6 +30,10 @@ O(n)思路：每次取第一位和最后一位的数字进行比较
   * 如果不相等，则不是回文，返回false
   * 若相等，则将整型数x去掉首尾再次检验，由于x去掉了首尾两位数，len也要减掉两个0，len=len/100
 
+
+* 注意 while(len<=x/10) 判断条件时不要写成 while(len\*10<=x),防止len\*10溢出导致结果出错
+
+
 * 针对特例 如1000021 并没有影响</br>
   第一次循环的时候，首尾各取出一个1，发现相等，之后取出中间的数字，为00002，也可以直接看成2</br>
   此时取出首位置的时候，除以的是10000，所以取出的是0，尾位置取出的是2，二者不同，直接返回false。</br>
@@ -38,18 +42,16 @@ O(n)思路：每次取第一位和最后一位的数字进行比较
 ```
 class Solution {
     public boolean isPalindrome(int x) {
-        if(x<0) return false;
-        if(x<10) return true;
+        if(x < 0) return false;
         int len = 1;
-        while(x/len >= 10)
-            len = len*10;
+        while(len<=x/10) len = len*10;
         while(x!=0){
-            if(x/len == x%10)
-                x = (x - (x/len)*len)/10;
-                // x = (x%len)/10;
-            else
+            int i = x%10;
+            int j = x/len;
+            if(i != j)
                 return false;
-            len = len/100;                       
+            x = (x -len*j)/10;
+            len = len/100;
         }
         return true;
     }
