@@ -20,26 +20,31 @@ Explanation: There is no common prefix among the input strings.
 All given inputs are in lowercase letters a-z.
 
 思路：
-* endPosi记录当前最长公前缀长度
-* 不断遍历strs[]中的每一个String
-  * 若访问到当前String没有第endPosi个字符，结束循环
-  * 若当前String的第endPosi个字符与第一个字符的第endPosi个字符不匹配，结束循环
-  * 若当前String是strs中最后一个String，当前最长公前缀长度+1，重置i=-1，从头开始新一轮遍历寻找下一个prefix字符
-* 通过用substring方法返回共同前缀的子字符串
+* s记录strs[]中第一个string，作为当前最长公前缀
+* 不断遍历strs[]中的剩下的每一个String
+  * 若访问到当前String为空，结束循环返回空
+  * 若当前String的第j个字符与当前公前缀的第j个字符不匹配，缩短公前缀为substring(0,j)
+  * 若当前String与当前公缀全部匹配，但当前公缀还有多余字符，将当前String作为当前公缀
 ```
 class Solution {
     public String longestCommonPrefix(String[] strs) {
-        if(strs.length == 0) return "";
-        int endPosi = 0;
-        for(int i = 0; i < strs.length; i++){
-            if(endPosi >= strs[i].length() || strs[i].charAt(endPosi) != strs[0].charAt(endPosi) )
-                break;    
-            if(i == strs.length - 1){
-                i = -1;
-                endPosi++;
-            }              
+        if(strs.length==0) return "";
+        String s = strs[0];
+        for(int i = 1; i < strs.length; i++){
+            if(strs[i].equals("")) return "";
+            for(int j = 0; j < strs[i].length(); j++){                
+                if(j < s.length() && s.charAt(j) != strs[i].charAt(j)){
+                    s = s.substring(0,j);
+                    break;
+                }
+                if(j == strs[i].length()-1 && s.length()>=strs[i].length())
+                    s = strs[i];
+            }
         }
-        return strs[0].substring(0,endPosi);
+        
+        return s;
+        
     }
 }
+
 ```
