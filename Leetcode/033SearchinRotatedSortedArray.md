@@ -43,14 +43,14 @@ class Solution {
             if(nums[mid]==target) return mid;
             if(nums[mid] < nums[right]){
                 if(nums[mid] < target && nums[right] >= target)
-                    left = mid + 1;
+                    left = mid;
                 else
-                    right = mid - 1;
+                    right = mid;
             }else{
                 if(nums[mid] > target && nums[left] <= target)
-                    right = mid - 1;
+                    right = mid;
                 else
-                    left = mid + 1;
+                    left = mid;
             }
         }
         if(nums[right] == target) return right;
