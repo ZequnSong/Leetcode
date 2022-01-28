@@ -22,7 +22,7 @@ Explanation: The square root of 8 is 2.82842..., and since
 
 相当于寻找最后一个number，使得number^2 <= x
 
-**注意判断时用mid > x/mid 而不是 mid*mid > x, 以为可能x为mid*mid可能越界溢出造成无法比较大小**
+**注意判断时用mid > x / mid 而不是 mid * mid > x, 以为可能x为mid * mid可能越界溢出造成无法比较大小**
 ```
 class Solution {
     public int mySqrt(int x) {
