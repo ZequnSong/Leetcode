@@ -3,8 +3,10 @@
 https://leetcode.com/problems/search-in-rotated-sorted-array/
 
 数组 [0 1 2 4 5 6 7] 
+
 假设 旋转成[4 5 6 7 0 1 2] 且target 是 1， 则当 nums[i] <= 1时
-     数组 X X X X O O X 不满足OOXX的模型
+
+数组 X X X X O O X 不满足OOXX的模型
 
 
 非传统有序数组，寻找能够保留有解的一半，去掉无解的一半的条件：
