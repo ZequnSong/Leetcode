@@ -30,6 +30,28 @@ class Solution {
 }
 ```
 
+* 复杂一点的做法，消耗O(n)的空间创建一个sum数组 sum[i] = nums[0]+nums[1]+...+nums[i-1]
+* 那数组nums中任意两点之和 nums(i ~ j) = sum[j+1]-sum[i]
+
+
+```
+//sum[i] = nums[0]+nums[1]+...+nums[i-1]
+//sum of nums(i ~ j) = sum[j+1]-sum[i]
+int[] sum = new int[nums.length];
+        int sumMin = 10000;
+        int res = -10000;
+        for(int i = 0; i < nums.length; i++){
+            sum[i] = i == 0 ? nums[i] : (sum[i-1]+nums[i]);
+            int curMax = Math.max(sum[i],sum[i] - sumMin);
+            res = Math.max(res,curMax);
+            sumMin = Math.min(sumMin, sum[i]);
+        }
+        return res;
+```
+
+
+
+
 思路2：Divide and Conquer
 
 * 把数组一分为二
