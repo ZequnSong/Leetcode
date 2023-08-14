@@ -31,7 +31,7 @@ class Solution {
 ```
 
 * 复杂一点的做法，消耗O(n)的空间创建一个sum数组 sum[i] = nums[0]+nums[1]+...+nums[i-1]
-* 那数组nums中任意两点之和 nums(i ~ j) = sum[j+1]-sum[i]
+* 那数组nums中任意两点之和 nums(i ~ j) = sum[j+1]-sum[i]   可知我们要令sum[j+1]尽可能大 令sum[i]尽可能小
 
 
 ```
