@@ -54,25 +54,32 @@ class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length;
         int n = nums2.length;
-        if((m+n)%2==0)
-            return (findKth(nums1,0,nums2,0,(m+n)/2)+findKth(nums1,0,nums2,0,(m+n)/2+1))/2.0;
-        else
-            return findKth(nums1,0,nums2,0,(m+n)/2+1);            
-    }
-    
-    int findKth(int[] nums1, int i, int[] nums2, int j, int k){
-        if(i >= nums1.length) return nums2[j + k - 1];
-        if(j >= nums2.length) return nums1[i + k - 1];
-        if(k == 1) return Math.min(nums1[i],nums2[j]);
-        
-        int mid1 = (i + k/2 - 1 < nums1.length) ? nums1[i+k/2-1] : Integer.MAX_VALUE;
-        int mid2 = (j + k/2 - 1 < nums2.length) ? nums2[j+k/2-1] : Integer.MAX_VALUE;
-        if(mid1 < mid2)
-            return findKth(nums1,i+k/2,nums2,j,k-k/2);
-        else
-            return findKth(nums1,i,nums2,j+k/2,k-k/2);
+        if((m+n)%2==0){
+            return (findKth(nums1, 0, nums2, 0, (m+n)/2) + findKth(nums1, 0, nums2, 0, (m+n)/2+1))/2.0;
+        } else {
+            return findKth(nums1, 0, nums2, 0, (m+n)/2+1);
+        }
     }
 
+    private int findKth(int[] nums1, int index1, int[] nums2, int index2, int k) {
+        int m = nums1.length;
+        int n = nums2.length;
+        //当起始index超出该数组最大index时说明该数组已经全部找完，余下的kth直接从另一个数组return即可
+        if(index1 > m-1) return nums2[index2 + k-1];
+        if(index2 > n-1) return nums1[index1 + k-1];
+        //当k==1时，直接比较即可
+        if(k==1) return Math.min(nums1[index1],nums2[index2]);
+
+        int mid1 = (index1 + k/2 -1 > m-1) ? Integer.MAX_VALUE : nums1[index1+k/2-1];
+        int mid2 = (index2 + k/2 -1 > n-1) ? Integer.MAX_VALUE : nums2[index2+k/2-1];
+        if(mid1 > mid2){
+            //若mid1大，则抛弃nums2中k/2个数，因此还剩下k-k/2个数要找 （奇偶性同样考虑在内）
+            return findKth(nums1, index1, nums2, index2+k/2, k-k/2);
+        } else {
+            //若mid2大，则抛弃nums1中k/2个数，因此还剩下k-k/2个数要找 （奇偶性同样考虑在内）
+            return findKth(nums1, index1+k/2, nums2, index2, k-k/2);
+        }
+    }
 }
 ```
 **Solution 2:**
