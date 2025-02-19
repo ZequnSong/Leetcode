@@ -71,3 +71,38 @@ class Solution {
     }
 }
 ```
+
+```
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        dfs(candidates, 0, new ArrayList<>(), target, res);
+        return res;
+    }
+
+    //1. 定义: 从candidates数组中的startIndex开始挑选，放到combination中，且他们的和等于target
+    void dfs(int[] candidates,//[1,2,3,4,5]
+      int startIndex,
+      List<Integer> comb,
+      int target,
+      List<List<Integer>> res) {
+        //3. 出口
+        if(target==0){
+            res.add(new ArrayList<>(comb));
+        }
+
+        //2. 递归的拆解
+        // 比如当前comb是[1], startIndex是1，该for循环要依次求
+        // [1,2] , [1,3] , [1,4] ....为comb时的情况
+        for(int i = startIndex; i < candidates.length; i++) {
+            if(target-candidates[i]<0) continue;
+            //[1] -> [1,2] 假设先把2加入comb
+            comb.add(candidates[i]);
+            // startIndex仍然为i因为可以重复取值
+            dfs(candidates, i, comb, target-candidates[i],res);
+            //[1,2]->[1]，dfs后要回溯，把‘2’remove掉，外侧for循环才能继续正确把‘3’加入comb
+            comb.remove(comb.size()-1);
+        }
+    }
+}
+```
