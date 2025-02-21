@@ -33,6 +33,10 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 * 首先验证该列是否有冲突，遍历之前的所有行，若某一行相同列也有皇后，则冲突返回false；
 * 再验证两个对角线是否冲突，若都没有冲突，则说明该位置可以放皇后，放了新皇后之后，再对下一行调用递归即可，注意递归结束之后要返回状态
 
+验证对角线是否冲突时，只需验证当前row之前的Q点即可，因为此时当前row之后还没放Q，因此for循环时可令i=row-1
+
+也可用坐标变换数组，更省事，但是会有很多不必要计算，耗时长
+
 
 ```
 class Solution {
