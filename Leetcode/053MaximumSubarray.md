@@ -33,7 +33,6 @@ class Solution {
 * 复杂一点的做法，消耗O(n)的空间创建一个sum数组 sum[i] = nums[0]+nums[1]+...+nums[i-1]
 * 那数组nums中任意两点之和 nums(i ~ j) = sum[j+1]-sum[i]   可知我们要令sum[j+1]尽可能大 令sum[i]尽可能小
 
-
 ```
 //sum[i] = nums[0]+nums[1]+...+nums[i-1]
 //sum of nums(i ~ j) = sum[j+1]-sum[i]
@@ -48,7 +47,31 @@ int[] sum = new int[nums.length];
         }
         return res;
 ```
+* 优化-》 不需要构造数组
+```
+class Solution {
+    public int maxSubArray(int[] nums) {
+        // sum[i] = nums[0]+nums[1]+...+nums[i-1]
+        // 则子数组i-j的和 sum[i--j] = sum[j+1]-sum[i];
+        // largest sum相当于我们需要找
+        // -> sum[j+1] 最大
+        // -> sum[i] 最小
 
+        int sum = 0, minSum = 0;
+        int curMax = nums[0];
+        for(int i = 0; i < nums.length; i++) {
+            sum += nums[i]; // -> sum[j+1]
+            //以当前点j为右边界的所有子数组中，最大和为当前sum减去目前得到的最小sum[i]->minSum
+            //则sum-minSum等于以当前点j为右边界的所有子数组中的largest sum
+            //Math.max(curMax, sum-minSum)相当于和之前的j-1，j-2....为右边界时的所有子数组
+            // 的largest sum比较，保留目前的largest sum
+            curMax = Math.max(curMax, sum-minSum);
+            minSum = Math.min(minSum, sum); //保证sum[i]永远最小
+        }
+        return curMax;        
+    }
+}
+```
 
 
 
