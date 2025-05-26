@@ -54,6 +54,17 @@ If we already have all the subsets of the first k elements, then we can get all 
 ```
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        for i in range(1<<len(nums)):
+            subset = []
+            for j in range(len(nums)):
+                if i & (1 << j):
+                    subset.append(nums[j])
+            res.append(subset)
+        return res
+-----one line version----
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
         res = [[]]
         for num in nums:
             res += [subset + [num] for subset in res]
