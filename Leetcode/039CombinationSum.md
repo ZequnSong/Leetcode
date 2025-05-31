@@ -42,6 +42,41 @@ A solution set is:
   * 若target等于0，说明找到解，此时的combination就是一个解，将其加入到res中
   * 将当前数组的值加入combination，每次调用递归，从target中减去当前数组的值，由于每个数值可以允许无限重复，所以递归时startIndex是i而不是i+1
   * 当剪枝或找到一个解后，递归结束返回，要清空combination中刚刚加入的数值
+ 
+
+```
+#PYTHON
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        comb = []
+        total = 0
+        candidates.sort()
+        def dfs(candidates, target, res, comb, total, start):
+            if total == target:
+                res.append(comb[:])
+                return
+            
+            for i in range(start, len(candidates)):
+                total += candidates[i]
+                if total <= target:
+                    comb.append(candidates[i])
+                    dfs(candidates, target, res, comb, total, i)
+                    comb.pop()
+                else:
+                    return
+                total -= candidates[i]
+        
+        dfs(candidates, target, res, comb, total, 0)
+        return res
+```
+
+
+
+
+
+
 
 ```
 class Solution {
