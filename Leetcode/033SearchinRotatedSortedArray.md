@@ -23,6 +23,27 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/
 
 只要在有序的半段里用首尾两个数组来判断目标值是否在这一区域内，这样就可以确定保留哪半边
 ```
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left = 0
+        right = len(nums)-1
+        while left + 1 < right:
+            mid = left + (right-left)//2
+            if nums[mid]<nums[right]:
+                if nums[mid] <= target <= nums[right]:
+                    left = mid
+                else:
+                    right = mid
+            else:
+                if nums[left] <= target <= nums[mid]:
+                    right = mid
+                else:
+                    left = mid
+        return left if nums[left] == target else right if nums[right] == target else -1
+
+
+
 class Solution {
     public int search(int[] nums, int target) {
         if(nums == null || nums.length == 0) return -1;
