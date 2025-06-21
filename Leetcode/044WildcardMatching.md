@@ -93,7 +93,44 @@ class Solution {
 * 然后就是推导一般的状态转移方程了
   * 若p中第j个字符是星号，由于星号可以匹配空串，所以如果p中的前 j-1 个字符跟s中前i个字符匹配成功了（ dp[i][j-1] 为true）的话，那么 dp[i][j] 也能为 true。或者若p中的前j个字符跟s中的前i-1个字符匹配成功了（ dp[i-1][j] 为true ）的话，那么 dp[i][j] 也能为 true（因为星号可以匹配任意字符串，再多加一个任意字符也没问题）。
   * 若p中的第j个字符不是星号，我们已经知道了s中前 i-1 个字符和p中前 j-1 个字符的匹配情况（即 dp[i-1][j-1] ），那么现在只需要匹配s中的第i个字符跟p中的第j个字符，若二者相等（ s[i-1] == p[j-1] ），或者p中的第j个字符是问号（ p[j-1] == '?' ），则dp[i][j]=dp[i-1][j-1]
-  
+
+```
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        return self.is_match_helper(s,0,p,0,{})
+        
+    # check if substring s start from index i can match subpattern p start from index j
+    def is_match_helper(self,s,i,p,j,memo):
+        if (i,j) in memo:
+            return memo[(i,j)]
+
+        # if sub-s is empty string
+        # return ture if sub-p is also empty or contains only *
+        if i == len(s):
+            while j<len(p) and p[j]=='*':
+                j += 1
+            memo[(i,j)] = j == len(p)
+            return memo[(i,j)]
+
+        # if sub-p is empty string: if reach here means sub-s is not empty
+        # which means no match
+        if j == len(p):
+            memo[(i,j)] = False
+            return memo[(i,j)]
+
+        if p[j] == '*':
+            matched = memo[(i,j)] = self.is_match_helper(s,i,p,j+1, memo) or self.is_match_helper(s,i+1,p,j, memo)
+        else:
+            matched = (p[j] == s[i] or p[j] == '?') and self.is_match_helper(s,i+1,p,j+1,memo)
+        memo[(i,j)] = matched
+        return matched
+
+```
+
+
+
+
+
 ```
 class Solution {
     public boolean isMatch(String s, String p) {
