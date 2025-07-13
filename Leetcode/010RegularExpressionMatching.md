@@ -54,6 +54,51 @@ p = "mis*is*p*."
 Output: false
 ```
 
+
+
+```
+
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        return self.helper(s,0,p,0,{})
+    
+    def helper(self, s, i, p, j, memo):
+        if (i,j) in memo:
+            return memo[(i,j)]
+
+        # if string is empty, need to check if current pattern can match empty string
+        if i==len(s):
+            memo[(i,j)] = self.is_match_empty(p[j:])
+            return memo[(i,j)]
+
+        # if pattern is empty or start with *, then must be Flase
+        if j==len(p) or p[j]=='*':
+            return False
+    
+        if j+1<len(p) and p[j+1]=='*':
+            # match 0 times or once
+            res = self.helper(s,i,p,j+2,memo) or ((s[i]==p[j] or p[j]=='.') and self.helper(s,i+1,p,j,memo))
+        else:
+            res = (s[i]==p[j] or p[j]=='.') and self.helper(s,i+1,p,j+1,memo)
+        
+        memo[(i,j)] = res
+        return res
+    
+    def is_match_empty(self, pattern):
+        if len(pattern)%2 == 1:
+            return False
+
+        index = 0
+        while index < len(pattern):
+            if pattern[index] == '*' or pattern[index+1] != '*':
+                return False
+            index += 2
+        return True
+```
+
+
+
+
 **DP思路: **
 
 * dp[i][j] 表示 s中前i个字符组成的子串和p中前j个字符组成的子串是否能匹配。大小初始化为 (m+1) x (n+1)，加1的原因是要包含 dp[0][0] 的情况
