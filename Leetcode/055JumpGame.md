@@ -48,17 +48,17 @@ DP思路:
   * 如果当上一个位置能够前进的最大步数,即dp数组的值不是正数，说明无法抵达当前位置，则直接返回false，最后循环结束后直接返回true即可
 
 ```
-class Solution {
-    public boolean canJump(int[] nums) {
-        int[] dp = new int[nums.length];
-        dp[0] = nums[0];
-        for(int i = 1; i < nums.length; i++){
-            if(dp[i-1] <= 0) return false;
-            dp[i] = Math.max(dp[i-1]-1, nums[i]);
-        }
-        return true;
-    }
-}
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        n = len(nums)
+        # dp[i] max jump capability from i
+        dp = [0 for _ in range(n)]
+        dp[0] = nums[0]
+        for i in range(1,len(nums)):
+            if(dp[i-1]<=0):
+                return False
+            dp[i] = max(dp[i-1]-1,nums[i])
+        return True
 ```
 
 类似 [Jump Game II](https://github.com/ZequnSong/Leetcode/blob/master/Leetcode/045JumpGameII.md) 的解法
