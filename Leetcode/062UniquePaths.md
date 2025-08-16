@@ -10,18 +10,17 @@
 * 由于只能向右或向下走，所以最上面行和最左面列(当i=0或j=0)的路径数都只能为1
 * 之后的递推式：dp[i][j] = dp[i-1][j] + dp[i][j-1]
 ```
-class Solution {
-    public int uniquePaths(int m, int n) {
-        int[][] dp = new int[m][n];
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                if(i == 0 || j == 0)
-                    dp[i][j] = 1;
-                else
-                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
-            }
-        }
-        return dp[m-1][n-1];
-    }
-}
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        grid = [[0 for _ in range(n)] for _ in range(m)]
+        grid[0][0] = 1
+        for i in range(m):
+            grid[i][0] = 1
+        for j in range(n):
+            grid[0][j] = 1
+        for i in range(1,m):
+            for j in range(1,n):
+                grid[i][j] = grid[i-1][j] + grid[i][j-1]
+        return grid[m-1][n-1]
+        
 ```
