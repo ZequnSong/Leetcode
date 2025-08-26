@@ -39,60 +39,49 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 
 
 ```
-class Solution {
-    public List<List<String>> solveNQueens(int n) {
-        List<List<String>> res = new ArrayList<>();
-        char[][] board = new char[n][n];
-        for (int i = 0; i < n; i ++) {
-            for (int j = 0; j < n; j ++) {
-                board[i][j] = '.';
-            }
-        }
-        helper(0, board, res);
-        return res;
-    }
-    
-    public void helper(int curRow, char[][] board, List<List<String>> res){
-        int n = board.length;
-        //if assignment is completed
-        if(curRow == n){
-            List<String> assignment = new ArrayList<>();
-            for(int i = 0; i < n; i++){
-                assignment.add(String.valueOf(board[i]));
-            }
-            res.add(assignment);
-            return;
-        }
-        
-        //select unassigned variable (Queen in curRow)
-        //for each value in varibale's domain
-        for(int i = 0; i < n; i++){
-            //if value is consistent
-            if(isConsistent(board, curRow, i)){
-                board[curRow][i] = 'Q';
-                helper(curRow+1, board, res);
-                board[curRow][i] = '.';
-            }
-        }
-    }
-    
-    boolean isConsistent(char[][] board, int row, int col){
-        //check if two Queens in same column
-        for(int i = 0; i < row; i++)
-            if(board[i][col] == 'Q') return false;
-        
-        //check left diagonal
-        for(int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
-            if(board[i][j] == 'Q') return false;
-        
-        //check right diagonal
-        for(int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++)
-            if(board[i][j] == 'Q') return false;
-        
-        return true;
-        
-    }
-}
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        res = []
+        if not n or n <= 0:
+            return res
+        board = [["." for _ in range(n)] for _ in range(n)]
+        def dfs(rowIndex):
+            nonlocal n
+            if rowIndex == n:
+                res.append([ "".join(board[i]) for i in range(n)])
+                return
+
+            for i in range(n):
+                if not self.isValid(board,rowIndex,i,n):
+                    continue
+                board[rowIndex][i] = "Q"
+                dfs(rowIndex+1)
+                board[rowIndex][i] = "."
+        dfs(0)
+        return res
+
+    def isValid(self,board,row,col,n):
+        # column check
+        for index in range(row):
+            if board[index][col] == "Q":
+                return False
+                
+        # diagonal check
+        cur_x,cur_y = row-1,col-1
+        while 0<=cur_x and 0<=cur_y:
+            if board[cur_x][cur_y] == "Q":
+                return False
+            cur_x-=1
+            cur_y-=1
+            
+        cur_x,cur_y = row-1,col+1
+        while 0<=cur_x and cur_y<n:
+            if board[cur_x][cur_y] == "Q":
+                return False
+            cur_x-=1
+            cur_y+=1
+
+        return True
 ```
 
 **思路2： CSP**
